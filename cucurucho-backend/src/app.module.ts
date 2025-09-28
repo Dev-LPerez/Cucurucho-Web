@@ -5,11 +5,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import { ProductsModule } from './products/products.module'; // <-- 1. Importa el nuevo módulo
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true, // Lee el archivo .env
+      isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -18,7 +19,7 @@ import { AuthModule } from './auth/auth.module';
         host: configService.get<string>('DB_HOST'),
         port: configService.get<number>('DB_PORT'),
         username: configService.get<string>('DB_USERNAME'),
-        password: configService.get<string>('DB_PASSWORD'), // <-- Extrae la contraseña de la BD
+        password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true,
@@ -27,6 +28,7 @@ import { AuthModule } from './auth/auth.module';
     }),
     UsersModule,
     AuthModule,
+    ProductsModule, // <-- 2. Añádelo a los imports
   ],
   controllers: [AppController],
   providers: [AppService],
