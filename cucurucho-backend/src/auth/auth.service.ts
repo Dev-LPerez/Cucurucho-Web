@@ -11,12 +11,27 @@ export class AuthService {
   ) {}
 
   async validateUser(username: string, pass: string): Promise<any> {
+    console.log(`--- Iniciando validación para usuario: ${username} ---`);
     const user = await this.usersService.findOne(username);
-    if (user && (await bcrypt.compare(pass, user.password_hash))) {
+
+    if (!user) {
+      console.log('Error de validación: Usuario no encontrado en la base de datos.');
+      return null;
+    }
+
+    console.log('Usuario encontrado en la BD:', user.username);
+    console.log('Hash guardado en la BD:', user.password_hash);
+
+    const isPasswordMatching = await bcrypt.compare(pass, user.password_hash);
+
+    if (isPasswordMatching) {
+      console.log('Resultado: ¡La contraseña COINCIDE!');
       const { password_hash, ...result } = user;
       return result;
+    } else {
+      console.log('Error de validación: La contraseña NO COINCIDE.');
+      return null;
     }
-    return null;
   }
 
   async login(user: any) {
