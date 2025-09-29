@@ -19,9 +19,6 @@ export class AuthService {
       return null;
     }
 
-    console.log('Usuario encontrado en la BD:', user.username);
-    console.log('Hash guardado en la BD:', user.password_hash);
-
     const isPasswordMatching = await bcrypt.compare(pass, user.password_hash);
 
     if (isPasswordMatching) {
