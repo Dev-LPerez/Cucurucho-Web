@@ -1,25 +1,29 @@
-import { Controller, Get, Post, Body, UseGuards, Req } from '@nestjs/common';
+// Ruta: dev-lperez/cucurucho-web/cucurucho-backend/src/products/products.controller.ts
+import { Controller, Get, Post, Body, UseGuards, ValidationPipe } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { Roles } from '../auth/roles.decorator'; // Crearemos este decorador
-import { RolesGuard } from '../auth/roles.guard'; // Crearemos este guard
+import { Roles } from '../auth/roles.decorator';
+import { RolesGuard } from '../auth/roles.guard';
 import { UserRole } from '../users/user.entity';
+import { CreateProductDto } from './dto/create-product.dto'; // <-- 1. Importa el DTO
 
 @Controller('products')
-@UseGuards(JwtAuthGuard, RolesGuard) // Proteger todas las rutas de este controlador
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   // --- Endpoints para Productos ---
   @Get()
-  @Roles(UserRole.ADMIN, UserRole.CASHIER) // Admin y Cajero pueden ver
+  @Roles(UserRole.ADMIN, UserRole.CASHIER)
   findAllProducts() {
     return this.productsService.findAllProducts();
   }
 
+  // --- ENDPOINT ACTUALIZADO ---
   @Post()
-  @Roles(UserRole.ADMIN) // Solo el Admin puede crear
-  createProduct(@Body() productData: any) {
+  @Roles(UserRole.ADMIN)
+  // 2. Usa el DTO y el ValidationPipe para validar los datos de entrada.
+  createProduct(@Body(new ValidationPipe()) productData: CreateProductDto) {
     return this.productsService.createProduct(productData);
   }
 
