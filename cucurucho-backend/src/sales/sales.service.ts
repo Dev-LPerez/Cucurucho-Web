@@ -6,6 +6,7 @@ import { Sale } from './sale.entity';
 import { SaleItem } from './sale-item.entity';
 import { Product } from '../products/product.entity';
 import { Ingredient } from '../inventory/ingredient.entity';
+import { Table, TableStatus } from '../tables/table.entity'; // Importar Table
 
 @Injectable()
 export class SalesService {
@@ -27,6 +28,15 @@ export class SalesService {
     try {
       let total = 0;
       const saleItems: SaleItem[] = [];
+
+      // Validar si la venta es para una mesa
+      let table: Table | null = null;
+      if (createSaleDto.tableId) {
+        table = await queryRunner.manager.findOneBy(Table, { id: createSaleDto.tableId });
+        if (!table) {
+          throw new NotFoundException(`Mesa con ID ${createSaleDto.tableId} no encontrada.`);
+        }
+      }
 
       for (const itemDto of createSaleDto.items) {
         const product = await queryRunner.manager.findOne(Product, {
@@ -62,6 +72,12 @@ export class SalesService {
       const sale = new Sale();
       sale.items = saleItems;
       sale.total = total;
+      if (table) {
+        sale.table = table;
+        // Si es una venta para una mesa, la marcamos como ocupada
+        table.status = TableStatus.OCCUPIED;
+        await queryRunner.manager.save(table);
+      }
 
       const savedSale = await queryRunner.manager.save(sale);
 
@@ -76,4 +92,3 @@ export class SalesService {
     }
   }
 }
-

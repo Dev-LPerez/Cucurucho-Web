@@ -95,26 +95,24 @@ button:disabled {
   background-color: #242424;
 }
 
-.pos-sidebar {
-  width: 350px;
+.order-sidebar {
+  width: 300px;
   background-color: #1a1a1a;
   padding: 1rem;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
 }
-.pos-sidebar h2 {
+.order-sidebar h2 {
   margin-top: 0;
   border-bottom: 1px solid #444;
   padding-bottom: 0.5rem;
 }
-
-.order-list {
-  list-style: none;
-  padding: 0;
+.order-items {
   flex-grow: 1;
   overflow-y: auto;
 }
-.order-list li {
+.order-item {
   display: flex;
   justify-content: space-between;
   padding: 0.5rem 0;
@@ -122,7 +120,7 @@ button:disabled {
 }
 
 .order-total {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   text-align: right;
   padding: 1rem 0;
   border-top: 2px solid #646cff;
@@ -131,12 +129,12 @@ button:disabled {
 .pay-button {
   width: 100%;
   padding: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   background-color: #28a745;
   color: white;
   border: none;
 }
-.pay-button:hover {
+.pay-button:hover:not(:disabled) {
   background-color: #218838;
 }
 
@@ -146,6 +144,7 @@ button:disabled {
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  overflow: hidden;
 }
 
 .pos-header {
@@ -154,9 +153,11 @@ button:disabled {
   align-items: center;
   padding-bottom: 1rem;
   border-bottom: 1px solid #444;
+  flex-shrink: 0;
 }
 .pos-header h1 {
   margin: 0;
+  font-size: 1.5rem;
 }
 .view-toggle button {
   margin-left: 0.5rem;
@@ -173,6 +174,7 @@ button:disabled {
   gap: 0.5rem;
   padding: 1rem 0;
   overflow-x: auto;
+  flex-shrink: 0;
 }
 .category-nav button {
   flex-shrink: 0;
@@ -216,31 +218,61 @@ button:disabled {
 
 .error-message {
   color: #ff4d4d;
+  background-color: rgba(255, 77, 77, 0.1);
+  padding: 0.5rem;
+  border-radius: 4px;
+  text-align: center;
+}
+.success-message {
+  color: #28a745;
+  background-color: rgba(40, 167, 69, 0.1);
+  padding: 0.5rem;
+  border-radius: 4px;
+  text-align: center;
 }
 
+
+/* --- NUEVO: Estilos para Mapa de Mesas --- */
 .table-map {
-    padding: 1rem;
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 1rem;
 }
 .table-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
 }
-.table {
-    background-color: #28a745;
-    color: white;
-    padding: 2rem 1rem;
-    border-radius: 8px;
-    text-align: center;
-    font-weight: bold;
-    cursor: pointer;
+.table-card {
+  padding: 2rem 1rem;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  border: 2px solid transparent;
 }
-.table.occupied {
-    background-color: #dc3545;
+.table-card.free {
+  background-color: #28a745;
+  color: white;
+}
+.table-card.occupied {
+  background-color: #dc3545;
+  color: white;
+}
+.table-card.paying {
+  background-color: #ffc107;
+  color: #333;
+}
+.table-card:hover {
+  transform: scale(1.05);
+  border-color: #fff;
 }
 
-/* --- NUEVO: Estilos Admin --- */
+
+/* --- Estilos Admin --- */
 .admin-container {
   padding: 2rem;
   max-width: 1200px;
@@ -300,4 +332,3 @@ button:disabled {
 .recipe-item-form select, .recipe-item-form input {
   flex-grow: 1;
 }
-

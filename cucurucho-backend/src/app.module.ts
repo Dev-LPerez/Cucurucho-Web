@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { ProductsModule } from './products/products.module';
 import { InventoryModule } from './inventory/inventory.module';
 import { SalesModule } from './sales/sales.module'; // <-- 1. Importa el nuevo módulo
+import { TablesModule } from './tables/tables.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { SalesModule } from './sales/sales.module'; // <-- 1. Importa el nuevo m
     ProductsModule,
     InventoryModule,
     SalesModule, // <-- 2. Añádelo a los imports
+    TablesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

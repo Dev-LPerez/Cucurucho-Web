@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, CreateDateColumn, OneToMany, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, CreateDateColumn, OneToMany, Column, ManyToOne } from 'typeorm';
 import { SaleItem } from './sale-item.entity';
+import { Table } from '../tables/table.entity'; // <-- Importar Table
 
 @Entity()
 export class Sale {
@@ -14,5 +15,8 @@ export class Sale {
 
   @Column('decimal', { precision: 10, scale: 2 })
   total: number;
-}
 
+  // Nueva relación con la mesa (puede ser nula para ventas de mostrador)
+  @ManyToOne(() => Table, (table) => table.sales, { nullable: true })
+  table: Table;
+}

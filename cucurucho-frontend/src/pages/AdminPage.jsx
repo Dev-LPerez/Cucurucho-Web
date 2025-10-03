@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProductManagement from '../components/ProductManagement';
 import IngredientManagement from '../components/IngredientManagement';
+import TableManagement from '../components/TableManagement'; // <-- 1. Importar
 
 function AdminPage() {
   const [activeTab, setActiveTab] = useState('products');
@@ -21,11 +22,16 @@ function AdminPage() {
         <button onClick={() => setActiveTab('ingredients')} className={activeTab === 'ingredients' ? 'active' : ''}>
           Ingredientes
         </button>
-        {/* Agrega aquí más botones para otras secciones */}
+        {/* 2. Botón para la nueva pestaña de Mesas */}
+        <button onClick={() => setActiveTab('tables')} className={activeTab === 'tables' ? 'active' : ''}>
+          Mesas
+        </button>
       </nav>
       <main className="admin-content">
         {activeTab === 'products' && <ProductManagement />}
         {activeTab === 'ingredients' && <IngredientManagement />}
+        {/* 3. Renderizar el nuevo componente */}
+        {activeTab === 'tables' && <TableManagement />}
       </main>
     </div>
   );
