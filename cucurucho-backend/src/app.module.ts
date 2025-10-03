@@ -7,7 +7,8 @@ import { UsersModule } from './users/users.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { ProductsModule } from './products/products.module';
-import { InventoryModule } from './inventory/inventory.module'; // <-- 1. Importa el nuevo módulo
+import { InventoryModule } from './inventory/inventory.module';
+import { SalesModule } from './sales/sales.module'; // <-- 1. Importa el nuevo módulo
 
 @Module({
   imports: [
@@ -31,7 +32,8 @@ import { InventoryModule } from './inventory/inventory.module'; // <-- 1. Import
     UsersModule,
     AuthModule,
     ProductsModule,
-    InventoryModule, // <-- 2. Añádelo a los imports
+    InventoryModule,
+    SalesModule, // <-- 2. Añádelo a los imports
   ],
   controllers: [AppController],
   providers: [AppService],
