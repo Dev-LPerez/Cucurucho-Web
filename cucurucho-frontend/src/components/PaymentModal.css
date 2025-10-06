@@ -1,0 +1,107 @@
+:root{
+  --bg: #121212;
+  --surface: #1a1a1a;
+  --muted: #9aa0a6;
+  --accent: #646cff;
+  --success: #28a745;
+  --warning: #ffc107;
+}
+
+.modal-overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+}
+
+.modal-content{
+  background: var(--surface);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  color: #fff;
+  max-height: 94vh;
+  overflow: auto;
+}
+
+.amount-display{
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  background: #1f1f1f;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.preset-btn{
+  padding: 0.6rem 0.8rem;
+  border-radius: 10px;
+  font-size: 16px;
+  border: none;
+  color: #fff;
+  background: var(--accent);
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.preset-btn.alt{
+  background: #2a2a2a;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+.keypad-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.keypad-btn{
+  min-width: 64px;
+  min-height: 64px;
+  font-size: 20px;
+  border-radius: 10px;
+  border: none;
+  background: #2a2a2a;
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.keypad-btn:active{ transform: translateY(1px); }
+
+.preset-row{ display:flex; gap:8px; }
+.preset-short{ background: #28a745; }
+
+.payment-aside{
+  width: 320px;
+  min-width: 260px;
+  background: rgba(255,255,255,0.02);
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.payments-list .payment-item{ background: #1a1a1a; padding:8px; border-radius:8px; display:flex; justify-content:space-between; }
+
+.confirm-payment-button{
+  padding: 12px;
+  font-size: 18px;
+  border-radius: 10px;
+  border: none;
+  width:100%;
+  cursor: pointer;
+}
+
+.error-message{ color: #ff4d4d; background: rgba(255,77,77,0.06); padding:8px; border-radius:6px; }
+
+/* Responsive: stack columns on small screens */
+@media (max-width: 760px){
+  .modal-content{ width: 98%; padding: 12px; }
+  .payment-aside{ width: 100%; min-width: auto; }
+  .keypad-btn{ min-width: 58px; min-height: 58px; }
+}
+

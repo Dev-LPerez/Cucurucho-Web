@@ -6,15 +6,15 @@ import LoginPage from './pages/LoginPage.jsx';
 import DashboardPage from './pages/DashboardPage.jsx';
 import PosPage from './pages/PosPage.jsx';
 import AdminPage from './pages/AdminPage.jsx'; // 1. Importa la nueva página de Admin.
-import './index.css';
+import Layout from './components/Layout.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
 
-function ProtectedRoute({ children }) {
-  const token = localStorage.getItem('user_token');
-  if (!token) {
-    return <Navigate to="/login" replace />;
-  }
-  return children;
-}
+// Nuevos imports para rutas que existen como componentes
+import ProductManagement from './components/ProductManagement.jsx';
+import IngredientManagement from './components/IngredientManagement.jsx';
+import TableManagement from './components/TableManagement.jsx';
+import QueuePage from './pages/QueuePage.jsx';
+import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -24,16 +24,33 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         
         <Route 
           path="/dashboard" 
-          element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} 
+          element={<ProtectedRoute><Layout><DashboardPage /></Layout></ProtectedRoute>}
         />
         <Route 
           path="/pos" 
-          element={<ProtectedRoute><PosPage /></ProtectedRoute>} 
+          element={<ProtectedRoute><Layout><PosPage /></Layout></ProtectedRoute>}
         />
+        <Route
+          path="/queue"
+          element={<ProtectedRoute><Layout><QueuePage /></Layout></ProtectedRoute>}
+        />
+        <Route
+          path="/products"
+          element={<ProtectedRoute><Layout><ProductManagement /></Layout></ProtectedRoute>}
+        />
+        <Route
+          path="/inventory"
+          element={<ProtectedRoute><Layout><IngredientManagement /></Layout></ProtectedRoute>}
+        />
+        <Route
+          path="/tables"
+          element={<ProtectedRoute><Layout><TableManagement /></Layout></ProtectedRoute>}
+        />
+
         {/* 2. Añade la nueva ruta protegida para el panel de administración */}
         <Route 
           path="/admin" 
-          element={<ProtectedRoute><AdminPage /></ProtectedRoute>} 
+          element={<ProtectedRoute><Layout><AdminPage /></Layout></ProtectedRoute>}
         />
 
         <Route 
@@ -46,4 +63,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </BrowserRouter>
   </React.StrictMode>,
 );
-

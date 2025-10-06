@@ -5,14 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0d3533e-6a44-4984-a369-1516240a74dc" name="Cambios" comment="feat(tables, pos): Implement table management and hybrid POS">
-      <change afterPath="$PROJECT_DIR$/cucurucho-backend/src/sales/dto/add-payment.dto.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cucurucho-backend/src/sales/sale.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-backend/src/sales/sale.entity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cucurucho-backend/src/sales/sales.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-backend/src/sales/sales.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cucurucho-backend/src/sales/sales.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-backend/src/sales/sales.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/Layout.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/PaymentModal.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/ProtectedRoute.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/layout.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/components/PaymentModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/PaymentModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/pages/PosPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/pages/PosPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/services/salesService.js" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/services/salesService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/components/QueueDisplay.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/QueueDisplay.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/main.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/pages/QueuePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/pages/QueuePage.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,34 +52,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Depuración de JavaScript.localhost:5173.executor": "Debug",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Node.js.PosPage.jsx.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "C:/Users/LUIS PEREZ/OneDrive/Desktop/Sistema POS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\LUIS PEREZ\\OneDrive\\Desktop\\Sistema POS\\cucurucho-backend\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "to.speed.mode.migration.done": "true",
-    "ts.external.directory.path": "C:\\Users\\LUIS PEREZ\\OneDrive\\Desktop\\Sistema POS\\cucurucho-backend\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Depuración de JavaScript.localhost:5173.executor&quot;: &quot;Debug&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Node.js.PosPage.jsx.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/LUIS PEREZ/OneDrive/Desktop/Sistema POS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\LUIS PEREZ\\OneDrive\\Desktop\\Sistema POS\\cucurucho-backend\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\LUIS PEREZ\\OneDrive\\Desktop\\Sistema POS\\cucurucho-backend\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\LUIS PEREZ\OneDrive\Desktop\Sistema POS\cucurucho-backend" />
