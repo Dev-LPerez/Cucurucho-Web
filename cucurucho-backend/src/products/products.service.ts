@@ -1,4 +1,4 @@
-// Ruta: dev-lperez/cucurucho-web/cucurucho-backend/src/products/products.service.ts
+// Ruta: cucurucho-web/cucurucho-backend/src/products/products.service.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -10,87 +10,126 @@ import { RecipeItem } from './recipe-item.entity';
 
 @Injectable()
 export class ProductsService {
-  constructor(
-    @InjectRepository(Product)
-    private productsRepository: Repository<Product>,
-    @InjectRepository(Category)
-    private categoriesRepository: Repository<Category>,
-    @InjectRepository(Modifier)
-    private modifiersRepository: Repository<Modifier>,
-    @InjectRepository(RecipeItem)
-    private recipeItemsRepository: Repository<RecipeItem>,
-  ) {}
+    constructor(
+        @InjectRepository(Product)
+        private productsRepository: Repository<Product>,
+        @InjectRepository(Category)
+        private categoriesRepository: Repository<Category>,
+        @InjectRepository(Modifier)
+        private modifiersRepository: Repository<Modifier>,
+        @InjectRepository(RecipeItem)
+        private recipeItemsRepository: Repository<RecipeItem>,
+    ) {}
 
-  // --- Métodos para Productos ---
-  findAllProducts(): Promise<Product[]> {
-    return this.productsRepository.find({ relations: ['category', 'modifiers', 'recipeItems', 'recipeItems.ingredient'] });
-  }
-
-  // --- MÉTODO ACTUALIZADO ---
-  async createProduct(productData: CreateProductDto): Promise<Product> {
-    const { name, price, categoryId, recipeItems } = productData;
-
-    const category = await this.categoriesRepository.findOneBy({ id: categoryId });
-    if (!category) {
-      throw new NotFoundException(`Categoría con ID ${categoryId} no encontrada`);
+    // --- Métodos para Productos ---
+    findAllProducts(): Promise<Product[]> {
+        return this.productsRepository.find({ relations: ['category', 'modifiers', 'recipeItems', 'recipeItems.ingredient'] });
     }
 
-    // Crea la entidad del producto principal.
-    const product = this.productsRepository.create({
-      name,
-      price,
-      category,
-    });
+    async createProduct(productData: CreateProductDto): Promise<Product> {
+        const { name, price, categoryId, recipeItems } = productData;
 
-    // Guarda el producto para obtener su ID.
-    const savedProduct = await this.productsRepository.save(product);
+        const category = await this.categoriesRepository.findOneBy({ id: categoryId });
+        if (!category) {
+            throw new NotFoundException(`Categoría con ID ${categoryId} no encontrada`);
+        }
 
-    // Crea y asocia los items de la receta.
-    if (recipeItems && recipeItems.length > 0) {
-      const items = recipeItems.map(itemDto =>
-        this.recipeItemsRepository.create({
-          quantity: itemDto.quantity,
-          product: savedProduct,
-          ingredient: { id: itemDto.ingredientId }, // Asocia por ID
-        }),
-      );
-      await this.recipeItemsRepository.save(items);
+        const product = this.productsRepository.create({
+            name,
+            price,
+            category,
+        });
+
+        const savedProduct = await this.productsRepository.save(product);
+
+        if (recipeItems && recipeItems.length > 0) {
+            const items = recipeItems.map(itemDto =>
+                this.recipeItemsRepository.create({
+                    quantity: itemDto.quantity,
+                    product: savedProduct,
+                    ingredient: { id: itemDto.ingredientId },
+                }),
+            );
+            await this.recipeItemsRepository.save(items);
+        }
+
+        const fullProduct = await this.productsRepository.findOne({
+            where: { id: savedProduct.id },
+            relations: ['category', 'recipeItems', 'recipeItems.ingredient'],
+        });
+
+        if (!fullProduct) {
+            throw new NotFoundException(`Error al recuperar el producto recién creado con ID ${savedProduct.id}`);
+        }
+
+        return fullProduct;
     }
-    
-    // --- CORRECCIÓN ---
-    // Vuelve a buscar el producto con todas sus relaciones para devolverlo completo.
-    const fullProduct = await this.productsRepository.findOne({
-        where: { id: savedProduct.id },
-        relations: ['category', 'recipeItems', 'recipeItems.ingredient'],
-    });
 
-    // Añadimos una comprobación por si el producto no se encontrara.
-    if (!fullProduct) {
-        throw new NotFoundException(`Error al recuperar el producto recién creado con ID ${savedProduct.id}`);
+    async updateProduct(id: number, productData: Partial<CreateProductDto>): Promise<Product> {
+        const product = await this.productsRepository.findOne({ where: {id}, relations: ['recipeItems']});
+        if (!product) {
+            throw new NotFoundException(`Producto con ID ${id} no encontrado`);
+        }
+
+        if (productData.name) product.name = productData.name;
+        if (productData.price) product.price = productData.price;
+        if (productData.categoryId) {
+            const category = await this.categoriesRepository.findOneBy({ id: productData.categoryId });
+            if (!category) throw new NotFoundException(`Categoría con ID ${productData.categoryId} no encontrada`);
+            product.category = category;
+        }
+
+        if (productData.recipeItems) {
+            if (product.recipeItems && product.recipeItems.length > 0) {
+                await this.recipeItemsRepository.remove(product.recipeItems);
+            }
+
+            const items = productData.recipeItems.map(itemDto =>
+                this.recipeItemsRepository.create({
+                    quantity: itemDto.quantity,
+                    product: { id },
+                    ingredient: { id: itemDto.ingredientId },
+                }),
+            );
+            await this.recipeItemsRepository.save(items);
+        }
+
+        await this.productsRepository.save(product);
+
+        // --- CORRECCIÓN ---
+        const updatedProduct = await this.productsRepository.findOne({ where: { id }, relations: ['category', 'recipeItems', 'recipeItems.ingredient'] });
+        if (!updatedProduct) {
+            // Esto sería muy raro, pero es bueno manejarlo
+            throw new NotFoundException(`No se pudo encontrar el producto con ID ${id} después de actualizarlo.`);
+        }
+        return updatedProduct;
     }
 
-    return fullProduct;
-  }
+    async deleteProduct(id: number): Promise<void> {
+        const result = await this.productsRepository.delete(id);
+        if (result.affected === 0) {
+            throw new NotFoundException(`Producto con ID ${id} no encontrado`);
+        }
+    }
 
+    // --- Métodos para Categorías ---
+    findAllCategories(): Promise<Category[]> {
+        return this.categoriesRepository.find({ relations: ['products'] });
+    }
 
-  // --- Métodos para Categorías ---
-  findAllCategories(): Promise<Category[]> {
-    return this.categoriesRepository.find({ relations: ['products'] });
-  }
+    createCategory(categoryData: Partial<Category>): Promise<Category> {
+        const category = this.categoriesRepository.create(categoryData);
+        return this.categoriesRepository.save(category);
+    }
 
-  createCategory(categoryData: Partial<Category>): Promise<Category> {
-    const category = this.categoriesRepository.create(categoryData);
-    return this.categoriesRepository.save(category);
-  }
+    // --- Métodos para Modificadores ---
+    findAllModifiers(): Promise<Modifier[]> {
+        return this.modifiersRepository.find();
+    }
 
-  // --- Métodos para Modificadores ---
-  findAllModifiers(): Promise<Modifier[]> {
-    return this.modifiersRepository.find();
-  }
-
-  createModifier(modifierData: Partial<Modifier>): Promise<Modifier> {
-    const modifier = this.modifiersRepository.create(modifierData);
-    return this.modifiersRepository.save(modifier);
-  }
+    createModifier(modifierData: Partial<Modifier>): Promise<Modifier> {
+        const modifier = this.modifiersRepository.create(modifierData);
+        return this.modifiersRepository.save(modifier);
+    }
 }
 
