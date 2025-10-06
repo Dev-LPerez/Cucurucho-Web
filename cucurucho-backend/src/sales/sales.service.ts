@@ -118,7 +118,15 @@ export class SalesService {
       }
 
       await queryRunner.commitTransaction();
-      return this.salesRepository.findOne({ where: { id: savedSale.id }, relations: ['items', 'table', 'payments'] });
+
+      const result = await this.salesRepository.findOne({ where: { id: savedSale.id }, relations: ['items', 'table', 'payments'] });
+
+      if (!result) {
+        // This should not happen in normal circumstances
+        throw new NotFoundException(`Failed to retrieve the created sale with id ${savedSale.id}`);
+      }
+
+      return result;
     } catch (err) {
       await queryRunner.rollbackTransaction();
       throw err;
