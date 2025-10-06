@@ -102,6 +102,7 @@ button:disabled {
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  box-sizing: border-box;
 }
 .order-sidebar h2 {
   margin-top: 0;
@@ -200,11 +201,11 @@ button:disabled {
   text-align: center;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-}
+.product-card img{ max-width:100%; height:auto; border-radius:6px; display:block; margin:0 auto 8px; }
 .product-card h3 {
   margin: 0 0 0.5rem 0;
   font-size: 1.1rem;
@@ -277,6 +278,7 @@ button:disabled {
   padding: 2rem;
   max-width: 1200px;
   margin: auto;
+  box-sizing: border-box;
 }
 .admin-header {
   display: flex;
@@ -352,11 +354,12 @@ button:disabled {
     padding: 2rem;
     border-radius: 8px;
     width: 90%;
-    max-width: 500px;
+    max-width: 900px;
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    box-sizing: border-box;
 }
 
 .modal-content h2 {
@@ -416,4 +419,39 @@ button:disabled {
 }
 .confirm-payment-button:hover:not(:disabled) {
     background-color: #218838;
+}
+
+/* Utility: content should never overflow viewport */
+* { box-sizing: border-box; }
+
+/* Responsive rules */
+@media (max-width: 1024px){
+  .product-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+}
+
+@media (max-width: 900px){
+  /* POS: apilar main y sidebar para pantallas pequeñas */
+  .pos-container { flex-direction: column; height: auto; }
+  .pos-main { order: 1; width: 100%; }
+  .order-sidebar { order: 2; width: 100%; min-width: 0; max-height: 40vh; overflow-y: auto; }
+
+  /* Product cards: ajustar tamaño de fuente y padding */
+  .product-card { padding: 0.75rem; }
+  .product-card h3 { font-size: 1rem; }
+  .product-card p { font-size: 1rem; }
+
+  /* Modal: usar layout column y que el aside quede debajo */
+  .modal-content { max-width: 98%; padding: 12px; }
+  .payment-aside { width: 100%; min-width: auto; }
+  .keypad-btn{ min-width: 54px; min-height: 54px; }
+}
+
+@media (max-width: 480px){
+  body{ font-size: 14px; }
+  .header { padding: 0 0.5rem; }
+  .main-content { padding: 0.75rem; }
+  .action-button { padding: 0.75rem 1rem; font-size: 1rem; }
+  .category-nav { gap: 0.4rem; }
+  .category-nav button { padding: 0.5rem 0.6rem; font-size: 0.95rem; }
+  .product-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 0.6rem; }
 }

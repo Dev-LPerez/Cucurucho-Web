@@ -5,16 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0d3533e-6a44-4984-a369-1516240a74dc" name="Cambios" comment="feat(tables, pos): Implement table management and hybrid POS">
-      <change afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/Layout.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/PaymentModal.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/ProtectedRoute.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/layout.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/components/PaymentModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/PaymentModal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/components/QueueDisplay.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/QueueDisplay.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/main.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/pages/QueuePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/pages/QueuePage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/components/layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/layout.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/index.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

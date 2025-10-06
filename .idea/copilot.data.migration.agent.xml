@@ -10,6 +10,7 @@
       <option value="8b6cfb2b-b6a5-4114-a3e9-2f173eda7068" />
       <option value="9925faf6-ae4e-4219-83e2-5f76e6d259ec" />
       <option value="9a423e4c-85ec-4b50-9ee5-89e1a6cb9080" />
+      <option value="abdc0df5-0fc9-43cd-86e2-c00a0f3fc076" />
       <option value="ad8c3d47-c3bd-4e33-95df-44640c3741f9" />
       <option value="ce232590-4454-48e7-bb2e-1c071ea92035" />
       <option value="d1a461fa-72c6-46e0-b017-dff9c4130434" />
@@ -98,6 +99,14 @@
             </set>
           </value>
         </entry>
+        <entry key="abdc0df5-0fc9-43cd-86e2-c00a0f3fc076">
+          <value>
+            <set>
+              <option value="e7bfd9b1-4c05-497c-92c2-98ddd2ec855a" />
+              <option value="73cb02bd-c7a8-48e9-98e8-e3ab129dd7e5" />
+            </set>
+          </value>
+        </entry>
         <entry key="ad8c3d47-c3bd-4e33-95df-44640c3741f9">
           <value>
             <set>
@@ -127,6 +136,8 @@
               <option value="ce6bdd93-a990-41b1-b42b-036513b2cdfe" />
               <option value="e61aca56-9002-4886-81da-92c17f115ca4" />
               <option value="e92295d3-9c80-4296-9633-c8f267eeaf59" />
+              <option value="e76dca68-a9c5-481a-83e5-a11c04e29ab0" />
+              <option value="59eb08a2-8037-494c-9f7a-524262844e91" />
             </set>
           </value>
         </entry>
@@ -149,6 +160,12 @@
       <entry key="8b6cfb2b-b6a5-4114-a3e9-2f173eda7068" />
       <entry key="9925faf6-ae4e-4219-83e2-5f76e6d259ec" />
       <entry key="9a423e4c-85ec-4b50-9ee5-89e1a6cb9080" />
+      <entry key="abdc0df5-0fc9-43cd-86e2-c00a0f3fc076">
+        <set>
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/layout.css" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/index.css" />
+        </set>
+      </entry>
       <entry key="ad8c3d47-c3bd-4e33-95df-44640c3741f9" />
       <entry key="ce232590-4454-48e7-bb2e-1c071ea92035" />
       <entry key="d1a461fa-72c6-46e0-b017-dff9c4130434">

@@ -25,6 +25,24 @@
   flex-direction:column;
   justify-content:space-between;
   border-right:1px solid rgba(255,255,255,0.03);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sidebar.open{
+  transform: translateX(0);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+.sidebar.collapsed{
+  transform: translateX(0);
+}
+
+.overlay{
+  display: none;
+}
+
+.overlay.visible{
+  display: none;
 }
 
 .brand{
@@ -126,6 +144,24 @@
 
 /* Responsive: ocultar sidebar en pantallas pequeñas */
 @media (max-width: 800px){
-  .sidebar{ display:none; }
-}
+  .sidebar{
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    transform: translateX(-100%);
+    z-index: 1200;
+    width: 220px;
+  }
+  .sidebar.collapsed{ transform: translateX(-100%); }
+  .sidebar.open{ transform: translateX(0); }
 
+  .overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1150;
+    display: none;
+  }
+  .overlay.visible{ display: block; }
+}
