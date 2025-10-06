@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { SaleItem } from './sale-item.entity';
 import { Table } from '../tables/table.entity';
-import { Payment } from './payment.entity'; // <-- 1. Importar Payment
+import { Payment } from './payment.entity';
 
 export enum SaleStatus {
   PENDING = 'pending', // Abierta, ej. en una mesa
@@ -33,15 +33,12 @@ export class Sale {
   @OneToMany(() => SaleItem, (item) => item.sale, { cascade: true })
   items: SaleItem[];
 
-  // --- NUEVOS CAMPOS PARA FACTURACIÓN ---
+  // --- CAMPOS PARA FACTURACIÓN (SIN IMPUESTOS) ---
   @Column('decimal', { precision: 10, scale: 2, default: 0 })
   subtotal: number;
 
   @Column('decimal', { precision: 10, scale: 2, default: 0 })
   discountAmount: number;
-
-  @Column('decimal', { precision: 10, scale: 2, default: 0 })
-  taxAmount: number;
 
   @Column('decimal', { precision: 10, scale: 2 })
   total: number;
@@ -72,4 +69,3 @@ export class Sale {
   })
   queueStatus: QueueStatus;
 }
-

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AgentMigrationStateService">
+    <option name="migrationStatus" value="IN_PROGRESS" />
+    <option name="pendingSessionIds">
+      <option value="1216d1a2-228f-433f-8a4f-1782619f6177" />
+      <option value="1749ef61-c77f-4e01-ac65-ac05ae135233" />
+      <option value="62c7e2aa-e1bb-4c45-911f-439eb155ef51" />
+      <option value="6979ff3f-88ca-422e-8ba7-90f5e34e1950" />
+      <option value="8b6cfb2b-b6a5-4114-a3e9-2f173eda7068" />
+      <option value="9925faf6-ae4e-4219-83e2-5f76e6d259ec" />
+      <option value="9a423e4c-85ec-4b50-9ee5-89e1a6cb9080" />
+      <option value="ad8c3d47-c3bd-4e33-95df-44640c3741f9" />
+      <option value="ce232590-4454-48e7-bb2e-1c071ea92035" />
+      <option value="d5f31dd3-ae0a-4276-8c8a-ecd436686065" />
+      <option value="d6c69448-5aab-45d3-b028-c7d4ce2f2d91" />
+    </option>
+    <option name="pendingTurns">
+      <map>
+        <entry key="1216d1a2-228f-433f-8a4f-1782619f6177">
+          <value>
+            <set>
+              <option value="e65624f7-1e07-4bc8-91cc-eff780c5613d" />
+              <option value="dde6d3fd-d34a-412c-8efd-f4f893e6aaaf" />
+            </set>
+          </value>
+        </entry>
+        <entry key="1749ef61-c77f-4e01-ac65-ac05ae135233">
+          <value>
+            <set>
+              <option value="0dae4e80-dcdf-4e99-80eb-1ab0ebbdd8fe" />
+            </set>
+          </value>
+        </entry>
+        <entry key="62c7e2aa-e1bb-4c45-911f-439eb155ef51">
+          <value>
+            <set>
+              <option value="27556e41-a916-4c4e-9489-9dcbb53b779c" />
+              <option value="116df775-c713-4781-933d-85de1a9a9b13" />
+              <option value="bbed2e4e-a023-430a-a811-9f7a85cd34bd" />
+            </set>
+          </value>
+        </entry>
+        <entry key="6979ff3f-88ca-422e-8ba7-90f5e34e1950">
+          <value>
+            <set>
+              <option value="1915fe7c-8cd1-4c14-bc3b-3216770eee9c" />
+              <option value="1a687c31-f682-4407-a8c1-6f1ca36f6f34" />
+              <option value="42673e11-2dbb-4224-a2ed-a761c0c7d1ab" />
+              <option value="4ec58709-1462-4f11-b3ec-e271fdd40377" />
+              <option value="76dfb5a5-5829-475d-abb5-d826083c4318" />
+              <option value="8dad241d-1735-486c-892c-ed093a0feca4" />
+              <option value="ca04e517-7cea-46bf-8565-7e0dfb4cba02" />
+              <option value="e0afade7-838f-4758-a971-8379fadd551f" />
+            </set>
+          </value>
+        </entry>
+        <entry key="8b6cfb2b-b6a5-4114-a3e9-2f173eda7068">
+          <value>
+            <set>
+              <option value="066d47b7-da7c-4bc2-9a26-46b220cedd96" />
+              <option value="0f383f1a-dbc7-4fa3-9e5e-ea25e5f75a6c" />
+              <option value="295f87df-f4a1-4c49-a5e6-ebbf5775f120" />
+              <option value="29f5b6ae-46c6-49f0-99d8-6d3cb8b669ef" />
+              <option value="60fa15e9-dc99-459c-8496-cd8b07df4236" />
+              <option value="7eda9638-8bbb-436e-a721-3bac7a9f28f0" />
+              <option value="ab4207b4-ac2a-470a-bf74-8dd84668e638" />
+              <option value="c0dfd51f-0773-40a5-90fe-e0f8944850e6" />
+              <option value="e0422e59-5b4f-4748-bc20-475327b49c93" />
+              <option value="e1f8b011-31b8-4dbf-89ba-dd3964f55324" />
+              <option value="e4207d30-30e6-48f1-b213-e82344328561" />
+            </set>
+          </value>
+        </entry>
+        <entry key="9925faf6-ae4e-4219-83e2-5f76e6d259ec">
+          <value>
+            <set>
+              <option value="06ca642e-05d4-44de-b968-d368ec8ac82b" />
+              <option value="bb52ba57-17fa-4ae2-a84e-8d09bf4bf3d5" />
+              <option value="ff840ced-931b-42d8-b206-3da80536a967" />
+            </set>
+          </value>
+        </entry>
+        <entry key="9a423e4c-85ec-4b50-9ee5-89e1a6cb9080">
+          <value>
+            <set>
+              <option value="d0c4699b-06d7-4e16-943f-f4149557cc78" />
+              <option value="19881906-3f84-4a04-a3da-6c36b3614679" />
+              <option value="ec3e9da8-0eb9-4b5e-8086-2b128fd2a699" />
+              <option value="d855a9a1-27a1-40bd-b221-f1a82366a944" />
+              <option value="c824aca0-71ba-43eb-bd91-51fa57e89321" />
+              <option value="ae676643-ac16-4bb3-9188-b6be8d6cbc06" />
+              <option value="3db334e9-5c05-4330-a669-bf08012872e2" />
+              <option value="9252b4d8-57de-4229-8e6b-1211be6413fb" />
+              <option value="d2ac1559-2ee8-45a0-9206-7088ccf6949f" />
+              <option value="afffd0f3-1772-4163-aaa5-d173a0c662c0" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ad8c3d47-c3bd-4e33-95df-44640c3741f9">
+          <value>
+            <set>
+              <option value="6b9dc28f-2f80-45bc-bfef-8b72c991f2ae" />
+              <option value="ae073ee7-92d5-4acf-9590-bb042ee0b865" />
+              <option value="d28faa48-c91e-472b-97fa-f57508fc5cd4" />
+            </set>
+          </value>
+        </entry>
+        <entry key="ce232590-4454-48e7-bb2e-1c071ea92035">
+          <value>
+            <set>
+              <option value="cb3549aa-9d2e-4000-8fc1-20a0cd62ef52" />
+              <option value="05acfd3e-6e50-4255-8fa0-03ecf5835cb7" />
+              <option value="fc8d79cf-aa02-4678-b64d-0dc35ead2afb" />
+              <option value="918129dd-624d-4f28-a139-ee1a03e0672b" />
+              <option value="f693e53b-4d2b-4946-9ef2-2ab64f86d4fa" />
+              <option value="96ad75aa-ec31-485a-b544-5de58889b1a4" />
+            </set>
+          </value>
+        </entry>
+        <entry key="d5f31dd3-ae0a-4276-8c8a-ecd436686065">
+          <value>
+            <set>
+              <option value="19009ff3-c5df-4f5e-bc9e-19a387145324" />
+              <option value="4192695b-cd7c-4a59-b44d-90deaf5d8578" />
+              <option value="e10654f2-c5c8-49b9-92f3-9092e89858c4" />
+            </set>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <pendingWorkingSetItems>
+      <entry key="1216d1a2-228f-433f-8a4f-1782619f6177">
+        <set>
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/index.css" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/App.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/pages/DashboardPage.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/pages/LoginPage.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/pages/PosPage.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/PaymentModal.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/App.css" />
+        </set>
+      </entry>
+      <entry key="1749ef61-c77f-4e01-ac65-ac05ae135233">
+        <set>
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/IngredientManagement.jsx" />
+        </set>
+      </entry>
+      <entry key="62c7e2aa-e1bb-4c45-911f-439eb155ef51">
+        <set>
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/index.css" />
+        </set>
+      </entry>
+      <entry key="6979ff3f-88ca-422e-8ba7-90f5e34e1950" />
+      <entry key="8b6cfb2b-b6a5-4114-a3e9-2f173eda7068" />
+      <entry key="9925faf6-ae4e-4219-83e2-5f76e6d259ec" />
+      <entry key="9a423e4c-85ec-4b50-9ee5-89e1a6cb9080">
+        <set>
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/theme.css" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/main.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/pages/LoginPage.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/pages/DashboardPage.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/pages/PosPage.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/pages/AdminPage.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/pages/QueuePage.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/ProductManagement.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/IngredientManagement.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/CategoryManagement.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/TableManagement.jsx" />
+        </set>
+      </entry>
+      <entry key="ad8c3d47-c3bd-4e33-95df-44640c3741f9" />
+      <entry key="ce232590-4454-48e7-bb2e-1c071ea92035">
+        <set>
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/App.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/index.css" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/App.css" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/pages/LoginPage.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/pages/DashboardPage.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/pages/AdminPage.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/ProductManagement.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/IngredientManagement.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/TableManagement.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/CategoryManagement.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/PaymentModal.jsx" />
+        </set>
+      </entry>
+      <entry key="d5f31dd3-ae0a-4276-8c8a-ecd436686065" />
+    </pendingWorkingSetItems>
+  </component>
+</project>

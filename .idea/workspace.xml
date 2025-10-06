@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a0d3533e-6a44-4984-a369-1516240a74dc" name="Cambios" comment="feat(tables, pos): Implement table management and hybrid POS">
+      <change afterPath="$PROJECT_DIR$/cucurucho-backend/src/sales/dto/add-payment.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-backend/src/sales/sale.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-backend/src/sales/sale.entity.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-backend/src/sales/sales.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-backend/src/sales/sales.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-backend/src/sales/sales.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-backend/src/sales/sales.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/components/PaymentModal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/PaymentModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/pages/PosPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/pages/PosPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/services/salesService.js" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/services/salesService.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Dev-LPerez&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Dev-LPerez/Cucurucho-Web.git&quot;,
+    &quot;accountId&quot;: &quot;1da70648-4aa4-4bfd-982a-5b3259bd1e34&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="33XXFRQJHdEgOiFl1XP70835EwQ" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Depuración de JavaScript.localhost:5173.executor": "Debug",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Node.js.PosPage.jsx.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "C:/Users/LUIS PEREZ/OneDrive/Desktop/Sistema POS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\LUIS PEREZ\\OneDrive\\Desktop\\Sistema POS\\cucurucho-backend\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "C:\\Users\\LUIS PEREZ\\OneDrive\\Desktop\\Sistema POS\\cucurucho-backend\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\LUIS PEREZ\OneDrive\Desktop\Sistema POS\cucurucho-backend" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-WS-252.26830.93" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Tarea por defecto">
+      <changelist id="a0d3533e-6a44-4984-a369-1516240a74dc" name="Cambios" comment="" />
+      <created>1759464287749</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1759464287749</updated>
+      <workItem from="1759464290206" duration="46000" />
+      <workItem from="1759464368554" duration="255000" />
+      <workItem from="1759464653229" duration="935000" />
+      <workItem from="1759465631915" duration="12000" />
+      <workItem from="1759465829677" duration="5405000" />
+      <workItem from="1759471332572" duration="1573000" />
+      <workItem from="1759472967712" duration="432000" />
+      <workItem from="1759473534066" duration="1143000" />
+      <workItem from="1759722243659" duration="3043000" />
+      <workItem from="1759725337710" duration="3132000" />
+      <workItem from="1759728522462" duration="5437000" />
+    </task>
+    <task id="LOCAL-00001" summary="feat(tables, pos): Implement table management and hybrid POS">
+      <option name="closed" value="true" />
+      <created>1759471418189</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1759471418189</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat(tables, pos): Implement table management and hybrid POS">
+      <option name="closed" value="true" />
+      <created>1759471446731</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1759471446731</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat(tables, pos): Implement table management and hybrid POS">
+      <option name="closed" value="true" />
+      <created>1759471535742</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1759471535742</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fixup! feat(tables, pos): Implement table management and hybrid POS" />
+    <MESSAGE value="feat(tables, pos): Implement table management and hybrid POS" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(tables, pos): Implement table management and hybrid POS" />
+  </component>
+</project>

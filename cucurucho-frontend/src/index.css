@@ -332,3 +332,88 @@ button:disabled {
 .recipe-item-form select, .recipe-item-form input {
   flex-grow: 1;
 }
+
+/* --- NUEVO: Estilos para el Modal de Pago --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #2a2a2a;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.payment-summary {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    border-bottom: 1px solid #444;
+    padding-bottom: 1rem;
+}
+.remaining-amount {
+    font-weight: bold;
+    color: #646cff;
+}
+
+.payment-form {
+    display: flex;
+    gap: 1rem;
+}
+.payment-form input, .payment-form select {
+    flex-grow: 1;
+    padding: 0.8rem;
+    border-radius: 4px;
+    border: 1px solid #555;
+    background-color: #333;
+    color: white;
+    font-size: 1rem;
+}
+
+.payment-list .payment-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    background-color: #333;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+}
+
+.confirm-payment-button {
+    background-color: #28a745;
+    color: white;
+    padding: 1rem;
+    font-size: 1.2rem;
+    border: none;
+}
+.confirm-payment-button:hover:not(:disabled) {
+    background-color: #218838;
+}
