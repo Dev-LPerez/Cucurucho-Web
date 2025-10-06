@@ -8,8 +8,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { ProductsModule } from './products/products.module';
 import { InventoryModule } from './inventory/inventory.module';
-import { SalesModule } from './sales/sales.module'; // <-- 1. Importa el nuevo módulo
+import { SalesModule } from './sales/sales.module';
 import { TablesModule } from './tables/tables.module';
+import { QueueModule } from './queue/queue.module';
 
 @Module({
   imports: [
@@ -34,8 +35,9 @@ import { TablesModule } from './tables/tables.module';
     AuthModule,
     ProductsModule,
     InventoryModule,
-    SalesModule, // <-- 2. Añádelo a los imports
+    SalesModule,
     TablesModule,
+    QueueModule,
   ],
   controllers: [AppController],
   providers: [AppService],
