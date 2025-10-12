@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { productService } from '../services/productService';
 import { inventoryService } from '../services/inventoryService';
+import ProductEditModal from './ProductEditModal';
 
 function ProductManagement() {
     const [products, setProducts] = useState([]);
     const [ingredients, setIngredients] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [editingProduct, setEditingProduct] = useState(null);
+    const [showEditModal, setShowEditModal] = useState(false);
 
     const [newProductName, setNewProductName] = useState('');
     const [newProductPrice, setNewProductPrice] = useState('');
@@ -88,6 +91,45 @@ function ProductManagement() {
         }
     };
 
+    const handleEditProduct = (product) => {
+        setEditingProduct(product);
+        setShowEditModal(true);
+    };
+
+    const handleSaveProduct = async (productId, productData) => {
+        try {
+            await productService.updateProduct(productId, productData);
+            // Recargar la lista de productos
+            const updatedProducts = await productService.getProducts();
+            setProducts(updatedProducts);
+        } catch (error) {
+            console.error("Error al actualizar el producto:", error);
+            throw error;
+        }
+    };
+
+    const handleCloseModal = () => {
+        setShowEditModal(false);
+        setEditingProduct(null);
+    };
+
+    const handleDeleteProduct = async (product) => {
+        if (window.confirm(`¿Estás seguro de que deseas eliminar "${product.name}"? Esta acción no se puede deshacer.`)) {
+            try {
+                console.log('Eliminando producto con ID:', product.id);
+                await productService.deleteProduct(product.id);
+                console.log('Producto eliminado exitosamente');
+                // Recargar la lista de productos desde el servidor
+                const updatedProducts = await productService.getProducts();
+                setProducts(updatedProducts);
+                alert('Producto eliminado exitosamente');
+            } catch (error) {
+                console.error('Error completo al eliminar:', error);
+                alert(`Error al eliminar el producto: ${error.response?.data?.message || error.message}`);
+            }
+        }
+    };
+
     return (
         <div>
             <h2>Gestión de Productos</h2>
@@ -145,12 +187,41 @@ function ProductManagement() {
             <h3>Lista de Productos</h3>
             <ul className="admin-list">
                 {products.map(product => (
-                    <li key={product.id}>
-                        <span>{product.name} - ${product.price} ({product.category?.name || 'Sin Categoría'})</span>
-                        <span>Ingredientes en receta: {product.recipeItems?.length || 0}</span>
+                    <li key={product.id} className="product-item">
+                        <div className="product-info">
+                            <span className="product-name">{product.name}</span>
+                            <span className="product-price">${product.price}</span>
+                            <span className="product-category">({product.category?.name || 'Sin Categoría'})</span>
+                            <span className="product-recipe">📝 {product.recipeItems?.length || 0} ingredientes</span>
+                        </div>
+                        <div style={{ display: 'flex', gap: '10px' }}>
+                            <button
+                                className="btn-edit-product"
+                                onClick={() => handleEditProduct(product)}
+                            >
+                                ✏️ Editar
+                            </button>
+                            <button
+                                className="btn-edit-product"
+                                style={{ background: 'linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%)' }}
+                                onClick={() => handleDeleteProduct(product)}
+                            >
+                                🗑️ Eliminar
+                            </button>
+                        </div>
                     </li>
                 ))}
             </ul>
+
+            {showEditModal && editingProduct && (
+                <ProductEditModal
+                    product={editingProduct}
+                    ingredients={ingredients}
+                    categories={categories}
+                    onClose={handleCloseModal}
+                    onSave={handleSaveProduct}
+                />
+            )}
         </div>
     );
 }

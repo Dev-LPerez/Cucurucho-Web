@@ -1,5 +1,5 @@
 // Ruta: cucurucho-web/cucurucho-backend/src/products/products.service.ts
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Product } from './product.entity';
@@ -66,7 +66,10 @@ export class ProductsService {
     }
 
     async updateProduct(id: number, productData: Partial<CreateProductDto>): Promise<Product> {
-        const product = await this.productsRepository.findOne({ where: {id}, relations: ['recipeItems']});
+        const product = await this.productsRepository.findOne({
+            where: {id},
+            relations: ['recipeItems', 'recipeItems.ingredient']
+        });
         if (!product) {
             throw new NotFoundException(`Producto con ID ${id} no encontrado`);
         }
@@ -79,37 +82,81 @@ export class ProductsService {
             product.category = category;
         }
 
-        if (productData.recipeItems) {
+        // Manejo de recipeItems - actualizar si está presente, incluso si es un array vacío
+        if (productData.recipeItems !== undefined) {
+            // Eliminar TODOS los items existentes usando delete para asegurar la eliminación
             if (product.recipeItems && product.recipeItems.length > 0) {
-                await this.recipeItemsRepository.remove(product.recipeItems);
+                const recipeItemIds = product.recipeItems.map(item => item.id);
+                await this.recipeItemsRepository.delete(recipeItemIds);
             }
 
-            const items = productData.recipeItems.map(itemDto =>
-                this.recipeItemsRepository.create({
-                    quantity: itemDto.quantity,
-                    product: { id },
-                    ingredient: { id: itemDto.ingredientId },
-                }),
-            );
-            await this.recipeItemsRepository.save(items);
+            // Limpiar la relación en el producto
+            product.recipeItems = [];
+            await this.productsRepository.save(product);
+
+            // Solo crear nuevos items si hay alguno
+            if (productData.recipeItems.length > 0) {
+                const items = productData.recipeItems.map(itemDto =>
+                    this.recipeItemsRepository.create({
+                        quantity: itemDto.quantity,
+                        product: { id },
+                        ingredient: { id: itemDto.ingredientId },
+                    }),
+                );
+                await this.recipeItemsRepository.save(items);
+            }
+        } else {
+            // Si no se envió recipeItems, solo guardar los cambios del producto
+            await this.productsRepository.save(product);
         }
 
-        await this.productsRepository.save(product);
+        // Recargar el producto con todas sus relaciones actualizadas
+        const updatedProduct = await this.productsRepository.findOne({
+            where: { id },
+            relations: ['category', 'recipeItems', 'recipeItems.ingredient']
+        });
 
-        // --- CORRECCIÓN ---
-        const updatedProduct = await this.productsRepository.findOne({ where: { id }, relations: ['category', 'recipeItems', 'recipeItems.ingredient'] });
         if (!updatedProduct) {
-            // Esto sería muy raro, pero es bueno manejarlo
             throw new NotFoundException(`No se pudo encontrar el producto con ID ${id} después de actualizarlo.`);
         }
+
         return updatedProduct;
     }
 
     async deleteProduct(id: number): Promise<void> {
-        const result = await this.productsRepository.delete(id);
-        if (result.affected === 0) {
+        // Primero buscar el producto con sus relaciones
+        const product = await this.productsRepository.findOne({
+            where: { id },
+            relations: ['recipeItems']
+        });
+
+        if (!product) {
             throw new NotFoundException(`Producto con ID ${id} no encontrado`);
         }
+
+        // Verificar si el producto tiene ventas asociadas
+        const salesCount = await this.productsRepository
+            .createQueryBuilder('product')
+            .leftJoin('sale_item', 'sale_item', 'sale_item.productId = product.id')
+            .where('product.id = :id', { id })
+            .andWhere('sale_item.id IS NOT NULL')
+            .getCount();
+
+        if (salesCount > 0) {
+            throw new BadRequestException(
+                `No se puede eliminar el producto "${product.name}" porque tiene ventas registradas. ` +
+                `Para mantener la integridad del historial de ventas, este producto no puede ser eliminado.`
+            );
+        }
+
+        // Eliminar los recipeItems relacionados primero
+        if (product.recipeItems && product.recipeItems.length > 0) {
+            const recipeItemIds = product.recipeItems.map(item => item.id);
+            await this.recipeItemsRepository.delete(recipeItemIds);
+        }
+
+        // Ahora eliminar el producto
+        await this.productsRepository.delete(id);
     }
 
     // --- Métodos para Categorías ---
@@ -122,6 +169,22 @@ export class ProductsService {
         return this.categoriesRepository.save(category);
     }
 
+    async updateCategory(id: number, categoryData: Partial<Category>): Promise<Category> {
+        const category = await this.categoriesRepository.findOneBy({ id });
+        if (!category) {
+            throw new NotFoundException(`Categoría con ID ${id} no encontrada`);
+        }
+        Object.assign(category, categoryData);
+        return this.categoriesRepository.save(category);
+    }
+
+    async deleteCategory(id: number): Promise<void> {
+        const result = await this.categoriesRepository.delete(id);
+        if (result.affected === 0) {
+            throw new NotFoundException(`Categoría con ID ${id} no encontrada`);
+        }
+    }
+
     // --- Métodos para Modificadores ---
     findAllModifiers(): Promise<Modifier[]> {
         return this.modifiersRepository.find();
@@ -132,4 +195,3 @@ export class ProductsService {
         return this.modifiersRepository.save(modifier);
     }
 }
-

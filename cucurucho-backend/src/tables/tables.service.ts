@@ -28,5 +28,20 @@ export class TablesService {
     table.status = status;
     return this.tablesRepository.save(table);
   }
-}
 
+  async updateTable(id: number, tableData: Partial<CreateTableDto>): Promise<Table> {
+    const table = await this.tablesRepository.findOneBy({ id });
+    if (!table) {
+      throw new NotFoundException(`Mesa con ID ${id} no encontrada.`);
+    }
+    Object.assign(table, tableData);
+    return this.tablesRepository.save(table);
+  }
+
+  async deleteTable(id: number): Promise<void> {
+    const result = await this.tablesRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Mesa con ID ${id} no encontrada.`);
+    }
+  }
+}

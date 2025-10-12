@@ -54,6 +54,19 @@ export class ProductsController {
         return this.productsService.createCategory(categoryData);
     }
 
+    @Patch('categories/:id')
+    @Roles(UserRole.ADMIN)
+    updateCategory(@Param('id') id: string, @Body() categoryData: any) {
+        return this.productsService.updateCategory(+id, categoryData);
+    }
+
+    @Delete('categories/:id')
+    @Roles(UserRole.ADMIN)
+    @HttpCode(HttpStatus.NO_CONTENT)
+    deleteCategory(@Param('id') id: string) {
+        return this.productsService.deleteCategory(+id);
+    }
+
     // --- Endpoints para Modificadores ---
     @Get('modifiers')
     @Roles(UserRole.ADMIN, UserRole.CASHIER)

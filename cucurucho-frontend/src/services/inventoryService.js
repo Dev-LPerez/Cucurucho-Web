@@ -30,6 +30,16 @@ const updateStock = async (ingredientId, change) => {
     }
 };
 
+const updateIngredient = async (ingredientId, ingredientData) => {
+    try {
+        const response = await apiClient.patch(`/inventory/ingredients/${ingredientId}`, ingredientData);
+        return response.data;
+    } catch (error) {
+        console.error('Error al actualizar el ingrediente:', error.response?.data?.message || error.message);
+        throw error;
+    }
+};
+
 // --- NUEVA FUNCIÓN PARA ELIMINAR UN INGREDIENTE ---
 const deleteIngredient = async (ingredientId) => {
     try {
@@ -44,5 +54,6 @@ export const inventoryService = {
     getIngredients,
     createIngredient,
     updateStock,
+    updateIngredient, // Exportar la nueva función
     deleteIngredient, // Exportar la nueva función
 };

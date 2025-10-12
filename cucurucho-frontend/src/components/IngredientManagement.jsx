@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { inventoryService } from '../services/inventoryService';
+import IngredientEditModal from './IngredientEditModal';
 
 function IngredientManagement() {
     const [ingredients, setIngredients] = useState([]);
@@ -7,6 +8,8 @@ function IngredientManagement() {
     const [newIngredientStock, setNewIngredientStock] = useState('');
     const [newIngredientUnit, setNewIngredientUnit] = useState('g');
     const [newIngredientCost, setNewIngredientCost] = useState('');
+    const [editingIngredient, setEditingIngredient] = useState(null);
+    const [showEditModal, setShowEditModal] = useState(false);
 
     const fetchIngredients = () => {
         inventoryService.getIngredients()
@@ -57,16 +60,35 @@ function IngredientManagement() {
         }
     };
 
-    // --- NUEVA FUNCIÓN PARA MANEJAR LA ELIMINACIÓN ---
+    const handleEdit = (ingredient) => {
+        setEditingIngredient(ingredient);
+        setShowEditModal(true);
+    };
+
+    const handleSave = async (id, ingredientData) => {
+        try {
+            await inventoryService.updateIngredient(id, ingredientData);
+            fetchIngredients();
+        } catch (error) {
+            console.error('Error al actualizar el ingrediente:', error);
+            throw error;
+        }
+    };
+
     const handleDelete = async (ingredient) => {
         if (window.confirm(`¿Estás seguro de que deseas eliminar "${ingredient.name}"? Esta acción no se puede deshacer.`)) {
             try {
                 await inventoryService.deleteIngredient(ingredient.id);
-                fetchIngredients(); // Recargar la lista
+                fetchIngredients();
             } catch (error) {
                 alert(`Error al eliminar el ingrediente: ${error.response?.data?.message || error.message}`);
             }
         }
+    };
+
+    const handleCloseModal = () => {
+        setShowEditModal(false);
+        setEditingIngredient(null);
     };
 
     return (
@@ -91,18 +113,40 @@ function IngredientManagement() {
             <h3>Inventario Actual</h3>
             <ul className="admin-list">
                 {ingredients.map(ing => (
-                    <li key={ing.id}>
-                        <span>{ing.name}</span>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                            <span>{ing.stock} {ing.unit}</span>
-                            <button onClick={() => handleStockAdjustment(ing, 'add')} style={{ padding: '0.2em 0.6em', fontSize: '1.2rem' }}>+</button>
-                            <button onClick={() => handleStockAdjustment(ing, 'remove')} style={{ padding: '0.2em 0.7em', fontSize: '1.2rem' }}>-</button>
-                            {/* --- NUEVO BOTÓN DE ELIMINAR --- */}
-                            <button onClick={() => handleDelete(ing)} style={{ backgroundColor: '#e83f5b', padding: '0.4em 0.8em' }}>Eliminar</button>
+                    <li key={ing.id} className="product-item">
+                        <div className="product-info">
+                            <span className="product-name">{ing.name}</span>
+                            <span className="product-price">{ing.stock} {ing.unit}</span>
+                            <span className="product-category">${ing.cost} / {ing.unit}</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                            <button onClick={() => handleStockAdjustment(ing, 'add')} style={{ padding: '8px 16px', fontSize: '1.2rem', background: '#4ade80', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer' }}>+</button>
+                            <button onClick={() => handleStockAdjustment(ing, 'remove')} style={{ padding: '8px 16px', fontSize: '1.2rem', background: '#f59e0b', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer' }}>-</button>
+                            <button
+                                className="btn-edit-product"
+                                onClick={() => handleEdit(ing)}
+                            >
+                                ✏️ Editar
+                            </button>
+                            <button
+                                className="btn-edit-product"
+                                style={{ background: 'linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%)' }}
+                                onClick={() => handleDelete(ing)}
+                            >
+                                🗑️ Eliminar
+                            </button>
                         </div>
                     </li>
                 ))}
             </ul>
+
+            {showEditModal && editingIngredient && (
+                <IngredientEditModal
+                    ingredient={editingIngredient}
+                    onClose={handleCloseModal}
+                    onSave={handleSave}
+                />
+            )}
         </div>
     );
 }

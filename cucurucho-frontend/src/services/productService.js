@@ -23,6 +23,25 @@ const createCategory = async (categoryData) => {
     }
 };
 
+const updateCategory = async (id, categoryData) => {
+    try {
+        const response = await apiClient.patch(`/products/categories/${id}`, categoryData);
+        return response.data;
+    } catch (error) {
+        console.error(`Error al actualizar la categoría ${id}:`, error.response?.data?.message || error.message);
+        throw error;
+    }
+};
+
+const deleteCategory = async (id) => {
+    try {
+        await apiClient.delete(`/products/categories/${id}`);
+    } catch (error) {
+        console.error(`Error al eliminar la categoría ${id}:`, error.response?.data?.message || error.message);
+        throw error;
+    }
+};
+
 // --- PRODUCTOS ---
 const getProducts = async () => {
     try {
@@ -67,9 +86,10 @@ const deleteProduct = async (id) => {
 export const productService = {
     getCategories,
     createCategory, // <-- Exporta la nueva función
+    updateCategory,
+    deleteCategory,
     getProducts,
     createProduct,
     updateProduct,
     deleteProduct,
 };
-

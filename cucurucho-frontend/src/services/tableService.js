@@ -20,8 +20,28 @@ const createTable = async (tableData) => {
   }
 };
 
+const updateTable = async (id, tableData) => {
+  try {
+    const response = await apiClient.patch(`/tables/${id}`, tableData);
+    return response.data;
+  } catch (error) {
+    console.error(`Error al actualizar la mesa ${id}:`, error.response?.data?.message || error.message);
+    throw error;
+  }
+};
+
+const deleteTable = async (id) => {
+  try {
+    await apiClient.delete(`/tables/${id}`);
+  } catch (error) {
+    console.error(`Error al eliminar la mesa ${id}:`, error.response?.data?.message || error.message);
+    throw error;
+  }
+};
+
 export const tableService = {
   getTables,
   createTable,
+  updateTable,
+  deleteTable,
 };
-

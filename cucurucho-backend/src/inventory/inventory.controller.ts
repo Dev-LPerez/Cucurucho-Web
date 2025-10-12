@@ -33,10 +33,18 @@ export class InventoryController {
     return this.inventoryService.updateStock(+id, updateStockDto.change);
   }
 
-  // --- NUEVO ENDPOINT PARA ELIMINAR UN INGREDIENTE ---
+  @Patch('ingredients/:id')
+  @Roles(UserRole.ADMIN)
+  updateIngredient(
+    @Param('id') id: string,
+    @Body() ingredientData: Partial<Ingredient>,
+  ): Promise<Ingredient> {
+    return this.inventoryService.updateIngredient(+id, ingredientData);
+  }
+
   @Delete('ingredients/:id')
   @Roles(UserRole.ADMIN)
-  @HttpCode(HttpStatus.NO_CONTENT) // Devuelve un código 204 si tiene éxito
+  @HttpCode(HttpStatus.NO_CONTENT)
   deleteIngredient(@Param('id') id: string): Promise<void> {
     return this.inventoryService.deleteIngredient(+id);
   }

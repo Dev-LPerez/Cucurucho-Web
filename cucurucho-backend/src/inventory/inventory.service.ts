@@ -36,7 +36,15 @@ export class InventoryService {
     return this.ingredientsRepository.save(ingredient);
   }
 
-  // --- NUEVO MÉTODO PARA ELIMINAR UN INGREDIENTE ---
+  async updateIngredient(id: number, ingredientData: Partial<Ingredient>): Promise<Ingredient> {
+    const ingredient = await this.ingredientsRepository.findOneBy({ id });
+    if (!ingredient) {
+      throw new NotFoundException(`Ingrediente con ID ${id} no encontrado.`);
+    }
+    Object.assign(ingredient, ingredientData);
+    return this.ingredientsRepository.save(ingredient);
+  }
+
   async deleteIngredient(id: number): Promise<void> {
     const result = await this.ingredientsRepository.delete(id);
     if (result.affected === 0) {

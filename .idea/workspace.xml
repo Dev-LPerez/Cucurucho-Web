@@ -5,14 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0d3533e-6a44-4984-a369-1516240a74dc" name="Cambios" comment="feat(tables, pos): Implement table management and hybrid POS">
-      <change afterPath="$PROJECT_DIR$/cucurucho-backend/src/inventory/dto/update-stock.dto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SOLUCION_ERROR_401.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/CategoryEditModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/IngredientEditModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/ProductEditModal.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/ProductEditModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/TableEditModal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cucurucho-backend/src/inventory/inventory.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-backend/src/inventory/inventory.controller.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cucurucho-backend/src/inventory/inventory.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-backend/src/inventory/inventory.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cucurucho-backend/src/products/dto/create-product.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-backend/src/products/dto/create-product.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-backend/src/products/products.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-backend/src/products/products.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-backend/src/products/products.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-backend/src/products/products.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-backend/src/tables/tables.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-backend/src/tables/tables.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-backend/src/tables/tables.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-backend/src/tables/tables.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/components/CategoryManagement.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/CategoryManagement.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/components/IngredientManagement.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/IngredientManagement.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/components/ProductManagement.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/ProductManagement.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/components/ProtectedRoute.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/ProtectedRoute.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/components/TableManagement.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/TableManagement.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/components/layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/layout.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/services/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/services/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/services/authService.js" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/services/authService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/services/inventoryService.js" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/services/inventoryService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/services/productService.js" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/services/productService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/services/tableService.js" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/services/tableService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, UseGuards, ValidationPipe, Param, Patch } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseGuards, ValidationPipe, Param, Patch, Delete, HttpCode, HttpStatus } from '@nestjs/common';
 import { TablesService } from './tables.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard } from '../auth/roles.guard';
@@ -29,5 +29,17 @@ export class TablesController {
   updateStatus(@Param('id') id: string, @Body('status') status: TableStatus) {
     return this.tablesService.updateStatus(+id, status);
   }
-}
 
+  @Patch(':id')
+  @Roles(UserRole.ADMIN)
+  updateTable(@Param('id') id: string, @Body() tableData: Partial<CreateTableDto>) {
+    return this.tablesService.updateTable(+id, tableData);
+  }
+
+  @Delete(':id')
+  @Roles(UserRole.ADMIN)
+  @HttpCode(HttpStatus.NO_CONTENT)
+  deleteTable(@Param('id') id: string) {
+    return this.tablesService.deleteTable(+id);
+  }
+}
