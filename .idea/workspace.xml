@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0d3533e-6a44-4984-a369-1516240a74dc" name="Cambios" comment="feat(tables, pos): Implement table management and hybrid POS">
-      <change beforePath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cucurucho-backend/src/inventory/dto/update-stock.dto.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/components/layout.css" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/layout.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-backend/src/inventory/inventory.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-backend/src/inventory/inventory.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-backend/src/inventory/inventory.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-backend/src/inventory/inventory.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-backend/src/products/dto/create-product.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-backend/src/products/dto/create-product.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/components/IngredientManagement.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/IngredientManagement.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/components/ProductManagement.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/components/ProductManagement.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cucurucho-frontend/src/services/inventoryService.js" beforeDir="false" afterPath="$PROJECT_DIR$/cucurucho-frontend/src/services/inventoryService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,6 +108,8 @@
       <workItem from="1759722243659" duration="3043000" />
       <workItem from="1759725337710" duration="3132000" />
       <workItem from="1759728522462" duration="5437000" />
+      <workItem from="1759979522459" duration="704000" />
+      <workItem from="1760227977853" duration="4628000" />
     </task>
     <task id="LOCAL-00001" summary="feat(tables, pos): Implement table management and hybrid POS">
       <option name="closed" value="true" />
