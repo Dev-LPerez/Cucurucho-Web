@@ -2,18 +2,22 @@
 
 import React, { useState, useEffect } from 'react';
 import { tableService } from '../services/tableService';
+import TableEditModal from './TableEditModal'; // Importamos el modal
 import '../pages/Admin.css';
 import './TableManagement.css';
 
 function TableManagement() {
-    // --- ESTADOS PARA DATOS REALES ---
+    // --- ESTADOS PARA DATOS ---
     const [tables, setTables] = useState([]);
 
-    // --- ESTADOS PARA EL FORMULARIO ---
+    // --- ESTADOS PARA EL MODAL DE EDICIÓN ---
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [editingTable, setEditingTable] = useState(null);
+
+    // --- ESTADOS PARA EL FORMULARIO DE CREACIÓN ---
     const [newTableName, setNewTableName] = useState('');
     const [newTableCapacity, setNewTableCapacity] = useState('');
 
-    // --- FUNCIÓN PARA CARGAR DATOS ---
     const loadTables = async () => {
         try {
             const data = await tableService.getTables();
@@ -24,12 +28,10 @@ function TableManagement() {
         }
     };
 
-    // --- Carga inicial de datos ---
     useEffect(() => {
         loadTables();
     }, []);
 
-    // --- MANEJO DEL FORMULARIO ---
     const handleSubmit = async (event) => {
         event.preventDefault();
         const tableData = {
@@ -45,7 +47,6 @@ function TableManagement() {
         try {
             await tableService.createTable(tableData);
             alert('Mesa creada exitosamente.');
-            // Limpiar formulario y recargar
             setNewTableName('');
             setNewTableCapacity('');
             loadTables();
@@ -55,7 +56,6 @@ function TableManagement() {
         }
     };
 
-    // --- MANEJO DE ELIMINACIÓN ---
     const handleDelete = async (tableId, tableName) => {
         if (window.confirm(`¿Estás seguro de que deseas eliminar la "${tableName}"?`)) {
             try {
@@ -69,9 +69,31 @@ function TableManagement() {
         }
     };
 
-    // --- CÁLCULOS PARA LAS MÉTRICAS ---
+    // --- LÓGICA DEL MODAL DE EDICIÓN ---
+    const handleOpenEditModal = (table) => {
+        setEditingTable(table);
+        setIsEditModalOpen(true);
+    };
+
+    const handleCloseEditModal = () => {
+        setIsEditModalOpen(false);
+        setEditingTable(null);
+    };
+
+    const handleSaveTable = async (id, tableData) => {
+        try {
+            await tableService.updateTable(id, tableData);
+            alert('Mesa actualizada exitosamente.');
+            loadTables();
+        } catch(error) {
+            console.error("Error al guardar la mesa:", error);
+            throw error; // Lanza el error para que el modal lo maneje
+        }
+    };
+
+
     const totalCapacity = tables.reduce((acc, table) => acc + (table.capacity || 0), 0);
-    const activeTables = tables.length; // Suponiendo que todas las mesas de la lista están activas
+    const activeTables = tables.length;
 
     return (
         <div className="admin-page-container">
@@ -106,7 +128,7 @@ function TableManagement() {
                     </div>
                     <div className="form-group">
                         <label htmlFor="tableCapacity">Capacidad (personas)</label>
-                        <input type="number" id="tableCapacity" placeholder="Ej: 4" value={newTableCapacity} onChange={e => setNewTableCapacity(e.target.value)} required />
+                        <input type="number" id="tableCapacity" placeholder="Ej: 4" min="1" value={newTableCapacity} onChange={e => setNewTableCapacity(e.target.value)} required />
                     </div>
                     <button type="submit">+ Agregar Mesa</button>
                 </form>
@@ -131,13 +153,21 @@ function TableManagement() {
                             </div>
                             <div className="table-card-actions">
                                 <button className="btn-action">Desactivar</button>
-                                <button className="btn-action btn-icon">✏️</button>
+                                <button className="btn-action btn-icon" onClick={() => handleOpenEditModal(table)}>✏️</button>
                                 <button className="btn-action btn-icon delete" onClick={() => handleDelete(table.id, table.name)}>🗑️</button>
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
+
+            {isEditModalOpen && (
+                <TableEditModal
+                    table={editingTable}
+                    onClose={handleCloseEditModal}
+                    onSave={handleSaveTable}
+                />
+            )}
         </div>
     );
 }

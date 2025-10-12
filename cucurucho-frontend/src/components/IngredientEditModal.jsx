@@ -6,7 +6,8 @@ function IngredientEditModal({ ingredient, onClose, onSave }) {
         name: '',
         stock: '',
         unit: 'g',
-        cost: ''
+        cost: '',
+        stockMinimo: ''
     });
     const [loading, setLoading] = useState(false);
 
@@ -16,7 +17,8 @@ function IngredientEditModal({ ingredient, onClose, onSave }) {
                 name: ingredient.name || '',
                 stock: ingredient.stock || '',
                 unit: ingredient.unit || 'g',
-                cost: ingredient.cost || ''
+                cost: ingredient.cost || '',
+                stockMinimo: ingredient.stockMinimo || ''
             });
         }
     }, [ingredient]);
@@ -34,11 +36,13 @@ function IngredientEditModal({ ingredient, onClose, onSave }) {
         setLoading(true);
 
         try {
+            // --- LÓGICA MODIFICADA ---
             const ingredientData = {
                 name: formData.name,
                 stock: parseFloat(formData.stock),
                 unit: formData.unit,
-                cost: parseFloat(formData.cost)
+                cost: parseFloat(formData.cost),
+                stockMinimo: parseFloat(formData.stockMinimo)
             };
 
             await onSave(ingredient.id, ingredientData);
@@ -127,6 +131,21 @@ function IngredientEditModal({ ingredient, onClose, onSave }) {
                             />
                         </div>
 
+                        {/* --- CAMPO AÑADIDO --- */}
+                        <div className="form-group">
+                            <label htmlFor="stockMinimo">Stock Mínimo</label>
+                            <input
+                                type="number"
+                                id="stockMinimo"
+                                name="stockMinimo"
+                                value={formData.stockMinimo}
+                                onChange={handleInputChange}
+                                step="0.01"
+                                min="0"
+                                required
+                            />
+                        </div>
+
                         <div className="modal-actions">
                             <button type="button" className="btn-cancel" onClick={onClose}>
                                 Cancelar
@@ -143,4 +162,3 @@ function IngredientEditModal({ ingredient, onClose, onSave }) {
 }
 
 export default IngredientEditModal;
-

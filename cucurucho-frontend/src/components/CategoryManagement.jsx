@@ -1,23 +1,33 @@
-// Ruta: cucurucho-web/cucurucho-frontend/src/components/CategoryManagement.jsx
+// Ruta: cucurucho-frontend/src/components/CategoryManagement.jsx
+
 import React, { useState, useEffect } from 'react';
 import { productService } from '../services/productService';
 import CategoryEditModal from './CategoryEditModal';
+import '../pages/Admin.css';
 
 function CategoryManagement() {
     const [categories, setCategories] = useState([]);
     const [newCategoryName, setNewCategoryName] = useState('');
     const [editingCategory, setEditingCategory] = useState(null);
-    const [showEditModal, setShowEditModal] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    const loadCategories = async () => {
+        try {
+            setLoading(true);
+            const data = await productService.getCategories();
+            setCategories(data);
+        } catch (error) {
+            console.error('Error al cargar categorías', error);
+            alert('No se pudieron cargar las categorías.');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
         loadCategories();
     }, []);
-
-    const loadCategories = () => {
-        productService.getCategories()
-            .then(setCategories)
-            .catch(console.error);
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -26,91 +36,106 @@ function CategoryManagement() {
             await productService.createCategory({ name: newCategoryName });
             setNewCategoryName('');
             loadCategories();
+            alert('Categoría creada exitosamente.');
         } catch (error) {
             console.error('Error al crear la categoría', error);
+            alert(`Error: ${error.response?.data?.message || error.message}`);
         }
     };
 
-    const handleEdit = (category) => {
-        setEditingCategory(category);
-        setShowEditModal(true);
+    const handleDelete = async (category) => {
+        if (window.confirm(`¿Estás seguro de que deseas eliminar la categoría "${category.name}"?`)) {
+            try {
+                await productService.deleteCategory(category.id);
+                loadCategories();
+                alert('Categoría eliminada.');
+            } catch (error) {
+                alert(`Error al eliminar: ${error.response?.data?.message || error.message}`);
+            }
+        }
     };
 
-    const handleSave = async (id, categoryData) => {
+    const handleOpenEditModal = (category) => {
+        setEditingCategory(category);
+        setIsEditModalOpen(true);
+    };
+
+    const handleCloseEditModal = () => {
+        setIsEditModalOpen(false);
+        setEditingCategory(null);
+    };
+
+    const handleSaveChanges = async (id, categoryData) => {
         try {
             await productService.updateCategory(id, categoryData);
             loadCategories();
-        } catch (error) {
+        } catch(error) {
             console.error('Error al actualizar la categoría:', error);
             throw error;
         }
     };
 
-    const handleDelete = async (category) => {
-        if (window.confirm(`¿Estás seguro de que deseas eliminar la categoría "${category.name}"? Esta acción no se puede deshacer.`)) {
-            try {
-                await productService.deleteCategory(category.id);
-                loadCategories();
-            } catch (error) {
-                alert(`Error al eliminar la categoría: ${error.response?.data?.message || error.message}`);
-            }
-        }
-    };
-
-    const handleCloseModal = () => {
-        setShowEditModal(false);
-        setEditingCategory(null);
-    };
-
     return (
-        <div>
-            <h2>Gestión de Categorías</h2>
-            <form onSubmit={handleSubmit} className="admin-form">
-                <h3>Añadir Nueva Categoría</h3>
-                <input
-                    type="text"
-                    placeholder="Nombre de la categoría"
-                    value={newCategoryName}
-                    onChange={(e) => setNewCategoryName(e.target.value)}
-                    required
-                />
-                <button type="submit">Añadir Categoría</button>
-            </form>
+        <div className="admin-page-container">
+            <div className="admin-page-header">
+                <h2>Gestión de Categorías</h2>
+                <p>Organiza los productos de tu menú</p>
+            </div>
 
-            <h3>Categorías Existentes</h3>
-            <ul className="admin-list">
-                {categories.map((cat) => (
-                    <li key={cat.id} className="product-item">
-                        <div className="product-info">
-                            <span className="product-name">{cat.name}</span>
-                            <span className="product-category" style={{ color: '#fbbf24' }}>
-                                {cat.products?.length || 0} productos
-                            </span>
-                        </div>
-                        <div style={{ display: 'flex', gap: '10px' }}>
-                            <button
-                                className="btn-edit-product"
-                                onClick={() => handleEdit(cat)}
-                            >
-                                ✏️ Editar
-                            </button>
-                            <button
-                                className="btn-edit-product"
-                                style={{ background: 'linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%)' }}
-                                onClick={() => handleDelete(cat)}
-                            >
-                                🗑️ Eliminar
-                            </button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
+            <div className="admin-card">
+                <div className="admin-card-header">
+                    <h3>Añadir Nueva Categoría</h3>
+                </div>
+                <form onSubmit={handleSubmit} style={{ display: 'flex', gap: '1rem', alignItems: 'flex-end' }}>
+                    <div className="form-group" style={{ flexGrow: 1 }}>
+                        <label htmlFor="categoryName">Nombre de la Categoría</label>
+                        <input
+                            type="text"
+                            id="categoryName"
+                            placeholder="Ej: Helados"
+                            value={newCategoryName}
+                            onChange={(e) => setNewCategoryName(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <button type="submit" style={{ height: '44px' }}>+ Añadir Categoría</button>
+                </form>
+            </div>
 
-            {showEditModal && editingCategory && (
+            <div className="admin-card">
+                <div className="admin-card-header">
+                    <h3>Categorías Existentes</h3>
+                </div>
+                {loading ? <p>Cargando...</p> : (
+                    <table className="admin-table">
+                        <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Nº de Productos</th>
+                            <th style={{ textAlign: 'right' }}>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {categories.map((cat) => (
+                            <tr key={cat.id}>
+                                <td>{cat.name}</td>
+                                <td>{cat.products?.length || 0}</td>
+                                <td className="actions-cell">
+                                    <button className="action-btn" onClick={() => handleOpenEditModal(cat)}>✏️</button>
+                                    <button className="action-btn delete" onClick={() => handleDelete(cat)}>🗑️</button>
+                                </td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                )}
+            </div>
+
+            {isEditModalOpen && (
                 <CategoryEditModal
                     category={editingCategory}
-                    onClose={handleCloseModal}
-                    onSave={handleSave}
+                    onClose={handleCloseEditModal}
+                    onSave={handleSaveChanges}
                 />
             )}
         </div>

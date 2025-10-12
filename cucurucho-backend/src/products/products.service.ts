@@ -54,13 +54,19 @@ export class ProductsService {
       throw new NotFoundException(`Categoría con ID ${categoryId} no encontrada`);
     }
 
-    const cost = await this.calculateRecipeCost(recipeItems || []);
+    // --- LÓGICA MODIFICADA ---
+    let cost = 0;
+    if (productData.cost !== undefined && productData.cost !== null) {
+      cost = productData.cost;
+    } else {
+      cost = await this.calculateRecipeCost(recipeItems || []);
+    }
 
     const product = this.productsRepository.create({
       name,
       price,
       category,
-      cost,
+      cost, // Guardar el costo final
     });
 
     const savedProduct = await this.productsRepository.save(product);

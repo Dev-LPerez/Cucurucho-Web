@@ -17,6 +17,7 @@ import ProductManagement from './components/ProductManagement.jsx';
 import IngredientManagement from './components/IngredientManagement.jsx';
 import TableManagement from './components/TableManagement.jsx';
 import ReportsPage from './pages/ReportsPage.jsx'; // ¡Importa la nueva página!
+import CategoryManagement from './components/CategoryManagement.jsx'; // ¡Importa el nuevo componente!
 
 import './index.css';
 
@@ -37,6 +38,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     {/* Rutas de Administración (anidadas) */}
                     <Route path="/admin/dashboard" element={<DashboardPage />} />
                     <Route path="/admin/products" element={<ProductManagement />} />
+                    {/* --- RUTA AÑADIDA --- */}
+                    <Route path="/admin/categories" element={<CategoryManagement />} />
                     <Route path="/admin/ingredients" element={<IngredientManagement />} />
                     <Route path="/admin/tables" element={<TableManagement />} />
                     {/* ¡Añade la nueva ruta de reportes! */}

@@ -57,6 +57,7 @@ const AdminSidebar = () => (
     <nav className="admin-sidebar">
         <NavLink to="/admin/dashboard" className="admin-nav-link">Dashboard</NavLink>
         <NavLink to="/admin/products" className="admin-nav-link">Productos</NavLink>
+        <NavLink to="/admin/categories" className="admin-nav-link">Categorías</NavLink>
         <NavLink to="/admin/ingredients" className="admin-nav-link">Ingredientes</NavLink>
         <NavLink to="/admin/tables" className="admin-nav-link">Mesas</NavLink>
         <NavLink to="/admin/reports" className="admin-nav-link">Reportes</NavLink>

@@ -6,6 +6,7 @@
       <option value="1216d1a2-228f-433f-8a4f-1782619f6177" />
       <option value="1749ef61-c77f-4e01-ac65-ac05ae135233" />
       <option value="342ff7e4-bcbf-4940-a412-58013adb5c19" />
+      <option value="48aea073-ebcb-4281-b4d9-7f8b05664c53" />
       <option value="62c7e2aa-e1bb-4c45-911f-439eb155ef51" />
       <option value="6979ff3f-88ca-422e-8ba7-90f5e34e1950" />
       <option value="87f1834d-8890-4e9e-9bcf-673c4755f291" />
@@ -41,6 +42,14 @@
           <value>
             <set>
               <option value="9f78bc9a-acab-4979-a79b-1906bf263338" />
+            </set>
+          </value>
+        </entry>
+        <entry key="48aea073-ebcb-4281-b4d9-7f8b05664c53">
+          <value>
+            <set>
+              <option value="01b3f79b-50a8-4a85-acfb-9ddd6ee5e9ea" />
+              <option value="3cb885fa-ec62-4e77-aa68-0e4d464ab20b" />
             </set>
           </value>
         </entry>
@@ -113,6 +122,18 @@
               <option value="71a6ffe5-7671-4e8d-b0d2-550d52f916ef" />
               <option value="d720f45e-4068-4981-950d-fed05d8b910d" />
               <option value="22d01a80-cd19-40a1-8f59-ca326536e758" />
+              <option value="420279da-c2a8-425d-a8ec-a498f1d0452c" />
+              <option value="64890d7d-1766-4996-a3be-7feaef815171" />
+              <option value="094907bc-e486-41c9-91f2-678ba0425de1" />
+              <option value="3c5b267e-3288-4c7b-a51b-8abd9c28821a" />
+              <option value="0bdd54c8-e15c-44f7-8b9a-fb2a7677ee3d" />
+              <option value="1e2123be-8bf5-4c4f-bcf6-7a7267d0ba90" />
+              <option value="bc01893b-c70e-480d-b44f-5172dd75e7fb" />
+              <option value="778a5043-9a80-4ae3-9de1-aae5b585482b" />
+              <option value="f128037e-6481-4179-baec-b7d0d07e77d6" />
+              <option value="30a69bd4-528c-4564-be66-8c27e63fbebb" />
+              <option value="d31dc1d8-9d3e-4362-a6b2-df840bdd2d7d" />
+              <option value="efbb2527-1e45-4b22-993e-ab9a4252e115" />
             </set>
           </value>
         </entry>
@@ -198,6 +219,11 @@
       <entry key="1216d1a2-228f-433f-8a4f-1782619f6177" />
       <entry key="1749ef61-c77f-4e01-ac65-ac05ae135233" />
       <entry key="342ff7e4-bcbf-4940-a412-58013adb5c19" />
+      <entry key="48aea073-ebcb-4281-b4d9-7f8b05664c53">
+        <set>
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/main.jsx" />
+        </set>
+      </entry>
       <entry key="62c7e2aa-e1bb-4c45-911f-439eb155ef51" />
       <entry key="6979ff3f-88ca-422e-8ba7-90f5e34e1950" />
       <entry key="87f1834d-8890-4e9e-9bcf-673c4755f291" />
@@ -211,6 +237,11 @@
           <option value="file://$PROJECT_DIR$/cucurucho-backend/src/products/products.service.ts" />
           <option value="file://$PROJECT_DIR$/cucurucho-backend/src/products/products.module.ts" />
           <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/ProductManagement.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/ProductEditModal.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/TableEditModal.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/IngredientEditModal.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-backend/src/tables/tables.service.ts" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/Layout.jsx" />
         </set>
       </entry>
       <entry key="9925faf6-ae4e-4219-83e2-5f76e6d259ec" />

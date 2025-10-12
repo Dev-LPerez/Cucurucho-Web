@@ -39,6 +39,19 @@ export class TablesService {
   }
 
   async deleteTable(id: number): Promise<void> {
+    // Verificar si existen ventas asociadas a la mesa
+    const table = await this.tablesRepository.findOne({
+      where: { id },
+      relations: ['sales']
+    });
+    if (!table) {
+      throw new NotFoundException(`Mesa con ID ${id} no encontrada.`);
+    }
+    if (table.sales && table.sales.length > 0) {
+      throw new Error(
+        `No se puede eliminar la mesa porque tiene ventas asociadas. Para mantener el historial, primero elimina o reasigna las ventas.`
+      );
+    }
     const result = await this.tablesRepository.delete(id);
     if (result.affected === 0) {
       throw new NotFoundException(`Mesa con ID ${id} no encontrada.`);

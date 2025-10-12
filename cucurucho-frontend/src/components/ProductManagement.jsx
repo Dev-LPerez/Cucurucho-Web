@@ -1,34 +1,44 @@
 // Ruta: cucurucho-frontend/src/components/ProductManagement.jsx
 import React, { useState, useEffect } from 'react';
 import { productService } from '../services/productService';
-import '../pages/Admin.css'; // Estilos comunes de admin
+import { inventoryService } from '../services/inventoryService';
+import ProductEditModal from './ProductEditModal';
+import '../pages/Admin.css';
 
 function ProductManagement() {
     // --- ESTADOS PARA DATOS REALES ---
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [ingredients, setIngredients] = useState([]);
 
-    // --- ESTADOS PARA EL FORMULARIO ---
+    // --- ESTADOS PARA EL MODAL DE EDICIÓN ---
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [editingProduct, setEditingProduct] = useState(null);
+
+    // --- ESTADOS PARA EL FORMULARIO DE CREACIÓN ---
     const [newProductName, setNewProductName] = useState('');
     const [newProductPrice, setNewProductPrice] = useState('');
     const [newProductCategory, setNewProductCategory] = useState('');
+    const [newProductCost, setNewProductCost] = useState(''); // --- ESTADO AÑADIDO ---
 
     // --- FUNCIÓN PARA CARGAR DATOS ---
     const loadData = async () => {
         try {
-            const [productsData, categoriesData] = await Promise.all([
+            const [productsData, categoriesData, ingredientsData] = await Promise.all([
                 productService.getProducts(),
                 productService.getCategories(),
+                inventoryService.getIngredients(),
             ]);
             setProducts(productsData);
             setCategories(categoriesData);
-            // Establecer una categoría por defecto en el formulario si existen categorías
-            if (categoriesData.length > 0) {
+            setIngredients(ingredientsData);
+
+            if (categoriesData.length > 0 && !newProductCategory) {
                 setNewProductCategory(categoriesData[0].id);
             }
         } catch (error) {
             console.error("Error al cargar datos:", error);
-            // Aquí podrías mostrar una notificación al usuario
+            alert("Hubo un error al cargar los datos. Revisa la consola para más detalles.");
         }
     };
 
@@ -37,7 +47,7 @@ function ProductManagement() {
         loadData();
     }, []);
 
-    // --- MANEJO DEL FORMULARIO ---
+    // --- MANEJO DEL FORMULARIO DE CREACIÓN ---
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!newProductName || !newProductPrice || !newProductCategory) {
@@ -49,16 +59,19 @@ function ProductManagement() {
             name: newProductName,
             price: parseFloat(newProductPrice),
             categoryId: parseInt(newProductCategory),
-            // La receta se manejará en el modal de edición
         };
+        // --- LÓGICA MODIFICADA ---
+        if (newProductCost) {
+            productData.cost = parseFloat(newProductCost);
+        }
 
         try {
             await productService.createProduct(productData);
             alert('¡Producto creado exitosamente!');
-            // Limpiar formulario y recargar la lista de productos
             setNewProductName('');
             setNewProductPrice('');
-            loadData();
+            setNewProductCost(''); // Limpiar el nuevo campo
+            loadData(); // Recargar la lista de productos
         } catch (error) {
             console.error("Error al crear el producto:", error);
             alert(`Error al crear el producto: ${error.response?.data?.message || error.message}`);
@@ -71,7 +84,7 @@ function ProductManagement() {
             try {
                 await productService.deleteProduct(productId);
                 alert('Producto eliminado exitosamente.');
-                loadData(); // Recargar la lista
+                loadData();
             } catch (error) {
                 console.error(`Error al eliminar el producto ${productId}:`, error);
                 alert(`Error al eliminar: ${error.response?.data?.message || error.message}`);
@@ -79,11 +92,28 @@ function ProductManagement() {
         }
     };
 
-    // --- FUNCIÓN DE CÁLCULO (sin cambios) ---
+    // --- LÓGICA DEL MODAL DE EDICIÓN ---
+    const handleOpenEditModal = (product) => {
+        setEditingProduct(product);
+        setIsEditModalOpen(true);
+    };
+
+    const handleCloseEditModal = () => {
+        setIsEditModalOpen(false);
+        setEditingProduct(null);
+    };
+
+    const handleSaveProduct = async (productId, productData) => {
+        await productService.updateProduct(productId, productData);
+        alert('Producto actualizado exitosamente.');
+        loadData(); // Recargar datos para ver los cambios
+    };
+
+    // --- FUNCIÓN DE CÁLCULO ---
     const calculateMargin = (price, cost) => {
         const numPrice = parseFloat(price);
         const numCost = parseFloat(cost);
-        if (!numPrice || !numCost || numPrice === 0) return 'N/A';
+        if (!numPrice || isNaN(numCost) || numPrice === 0) return 'N/A';
         const margin = ((numPrice - numCost) / numPrice) * 100;
         return margin.toFixed(1) + '%';
     };
@@ -95,13 +125,13 @@ function ProductManagement() {
                 <p>Administra tu menú y recetas</p>
             </div>
 
-            {/* Formulario para Agregar Producto (CONECTADO) */}
+            {/* Formulario para Agregar Producto */}
             <div className="admin-card">
                 <div className="admin-card-header">
                     <h3>Agregar Nuevo Producto</h3>
                 </div>
-                <form className="admin-form-grid" onSubmit={handleSubmit}>
-                    <div className="form-group" style={{ gridColumn: 'span 2' }}>
+                <form className="admin-form-grid" onSubmit={handleSubmit} style={{gridTemplateColumns: '2fr 1fr 1fr 1fr auto'}}>
+                    <div className="form-group">
                         <label htmlFor="name">Nombre del Producto</label>
                         <input
                             type="text"
@@ -125,6 +155,19 @@ function ProductManagement() {
                             ))}
                         </select>
                     </div>
+                    {/* --- CAMPO AÑADIDO --- */}
+                    <div className="form-group">
+                        <label htmlFor="cost">Costo (Opcional)</label>
+                        <input
+                            type="number"
+                            id="cost"
+                            placeholder="0.00"
+                            step="0.01"
+                            min="0"
+                            value={newProductCost}
+                            onChange={(e) => setNewProductCost(e.target.value)}
+                        />
+                    </div>
                     <div className="form-group">
                         <label htmlFor="price">Precio ($)</label>
                         <input
@@ -132,18 +175,19 @@ function ProductManagement() {
                             id="price"
                             placeholder="0.00"
                             step="0.01"
+                            min="0"
                             value={newProductPrice}
                             onChange={(e) => setNewProductPrice(e.target.value)}
                             required
                         />
                     </div>
-                    <button type="submit" style={{ alignSelf: 'end', height: '44px' }}>
+                     <button type="submit" style={{ alignSelf: 'end', height: '44px' }}>
                         + Agregar Producto
                     </button>
                 </form>
             </div>
 
-            {/* Tabla de Productos Registrados (CONECTADA) */}
+            {/* Tabla de Productos Registrados */}
             <div className="admin-card">
                 <div className="admin-card-header">
                     <h3>Productos Registrados</h3>
@@ -172,9 +216,13 @@ function ProductManagement() {
                                         {calculateMargin(product.price, product.cost)}
                                     </span>
                             </td>
-                            <td>Ver ({product.recipeItems?.length || 0})</td>
+                            <td>
+                                <button className="action-btn" onClick={() => handleOpenEditModal(product)}>
+                                    Ver ({product.recipeItems?.length || 0})
+                                </button>
+                            </td>
                             <td className="actions-cell">
-                                <button className="action-btn">✏️</button>
+                                <button className="action-btn" onClick={() => handleOpenEditModal(product)}>✏️</button>
                                 <button
                                     className="action-btn delete"
                                     onClick={() => handleDelete(product.id, product.name)}
@@ -187,8 +235,20 @@ function ProductManagement() {
                     </tbody>
                 </table>
             </div>
+
+            {/* Renderizado Condicional del Modal */}
+            {isEditModalOpen && (
+                <ProductEditModal
+                    product={editingProduct}
+                    ingredients={ingredients}
+                    categories={categories}
+                    onClose={handleCloseEditModal}
+                    onSave={handleSaveProduct}
+                />
+            )}
         </div>
     );
 }
 
 export default ProductManagement;
+
