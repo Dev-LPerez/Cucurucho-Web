@@ -1,457 +1,70 @@
-/* Ruta: dev-lperez/cucurucho-web/cucurucho-frontend/src/index.css */
-/* --- Estilos Generales --- */
+/* Ruta: cucurucho-frontend/src/index.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    /* Paleta de Colores Principales */
+    --navy-dark: #0A1931;
+    --blue-dark: #1A3D63;
+    --blue-medium: #4A7FA7;
+    --blue-light: #B3CFE5;
+    --white-tint: #F6FAFD;
+    --white: #FFFFFF;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #1a1a1a;
+    /* Colores de Estado */
+    --success: #10b981;
+    --warning: #f59e0b;
+    --error: #ef4444;
+    --info: #3b82f6;
+    --purple: #a855f7;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    /* Colores de Texto */
+    --text-primary-light: var(--white-tint);
+    --text-secondary-light: var(--blue-light);
+    --text-primary-dark: var(--navy-dark);
+    --text-secondary-dark: var(--blue-dark);
+}
+
+/* --- Reseteo y Estilos Globales --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+    font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--white-tint);
+    color: var(--text-primary-dark);
 }
 
 #root {
-  width: 100%;
-  height: 100vh;
-  overflow: auto;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #2a2a2a;
-  cursor: pointer;
-  transition: all 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-  filter: brightness(1.2);
-}
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+/* --- Tipografía --- */
+h1, .h1 { font-size: 24px; font-weight: 600; }
+h2, .h2 { font-size: 24px; font-weight: 600; }
+h3, .h3 { font-size: 18px; font-weight: 600; }
+p, .p { font-size: 16px; font-weight: 400; }
+small, .small { font-size: 14px; font-weight: 400; }
+label, .label { font-size: 14px; font-weight: 500; }
+.tiny { font-size: 12px; }
 
-/* --- Estilos Página de Login --- */
-.login-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  gap: 1rem;
-}
-
-/* --- Estilos Dashboard --- */
-.dashboard-container {
-  padding: 2rem;
-  text-align: center;
-}
-.dashboard-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-.logout-button {
-  background-color: #444;
-}
-.dashboard-actions {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin-top: 1rem;
-}
-.action-button {
-  background-color: #646cff;
-  color: white;
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
-}
-
-
-/* --- Estilos POS --- */
-.pos-container {
-  display: flex;
-  height: 100vh;
-  width: 100%;
-  background-color: #242424;
-}
-
-.order-sidebar {
-  width: 300px;
-  background-color: #1a1a1a;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  box-sizing: border-box;
-}
-.order-sidebar h2 {
-  margin-top: 0;
-  border-bottom: 1px solid #444;
-  padding-bottom: 0.5rem;
-}
-.order-items {
-  flex-grow: 1;
-  overflow-y: auto;
-}
-.order-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #333;
-}
-
-.order-total {
-  font-size: 1.2rem;
-  text-align: right;
-  padding: 1rem 0;
-  border-top: 2px solid #646cff;
-}
-
-.pay-button {
-  width: 100%;
-  padding: 1rem;
-  font-size: 1.2rem;
-  background-color: #28a745;
-  color: white;
-  border: none;
-}
-.pay-button:hover:not(:disabled) {
-  background-color: #218838;
-}
-
-
-.pos-main {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  overflow: hidden;
-}
-
-.pos-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #444;
-  flex-shrink: 0;
-}
-.pos-header h1 {
-  margin: 0;
-  font-size: 1.5rem;
-}
-.view-toggle button {
-  margin-left: 0.5rem;
-  background-color: #333;
-}
-.view-toggle button.active {
-  background-color: #646cff;
-  color: white;
-}
-
-
-.category-nav {
-  display: flex;
-  gap: 0.5rem;
-  padding: 1rem 0;
-  overflow-x: auto;
-  flex-shrink: 0;
-}
-.category-nav button {
-  flex-shrink: 0;
-}
-.category-nav button.active {
-  background-color: #646cff;
-  color: white;
-}
-
-.product-grid {
-  flex-grow: 1;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 1rem;
-  overflow-y: auto;
-  padding: 1rem 0;
-}
-
-.product-card {
-  background-color: #2a2a2a;
-  border-radius: 8px;
-  padding: 1rem;
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.product-card img{ max-width:100%; height:auto; border-radius:6px; display:block; margin:0 auto 8px; }
-.product-card h3 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.1rem;
-}
-.product-card p {
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #28a745;
-}
-
-.error-message {
-  color: #ff4d4d;
-  background-color: rgba(255, 77, 77, 0.1);
-  padding: 0.5rem;
-  border-radius: 4px;
-  text-align: center;
-}
-.success-message {
-  color: #28a745;
-  background-color: rgba(40, 167, 69, 0.1);
-  padding: 0.5rem;
-  border-radius: 4px;
-  text-align: center;
-}
-
-
-/* --- NUEVO: Estilos para Mapa de Mesas --- */
-.table-map {
-  flex-grow: 1;
-  overflow-y: auto;
-  padding: 1rem;
-}
-.table-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
-}
-.table-card {
-  padding: 2rem 1rem;
-  border-radius: 8px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: transform 0.2s, background-color 0.2s;
-  border: 2px solid transparent;
-}
-.table-card.free {
-  background-color: #28a745;
-  color: white;
-}
-.table-card.occupied {
-  background-color: #dc3545;
-  color: white;
-}
-.table-card.paying {
-  background-color: #ffc107;
-  color: #333;
-}
-.table-card:hover {
-  transform: scale(1.05);
-  border-color: #fff;
-}
-
-
-/* --- Estilos Admin --- */
-.admin-container {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: auto;
-  box-sizing: border-box;
-}
-.admin-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid #444;
-  padding-bottom: 1rem;
-}
-.admin-nav {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-.admin-nav button.active {
-  background-color: #646cff;
-  border-color: #646cff;
-}
-.admin-form {
-  background-color: #2a2a2a;
-  padding: 1.5rem;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-.admin-form input, .admin-form select {
-  padding: 0.8rem;
-  border-radius: 4px;
-  border: 1px solid #555;
-  background-color: #333;
-  color: white;
-  font-size: 1rem;
-}
-.admin-list {
-  list-style: none;
-  padding: 0;
-}
-.admin-list li {
-  background-color: #2a2a2a;
-  padding: 1rem;
-  border-radius: 4px;
-  margin-bottom: 0.5rem;
-  display: flex;
-  justify-content: space-between;
-}
-.recipe-item-form {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-.recipe-item-form select, .recipe-item-form input {
-  flex-grow: 1;
-}
-
-/* --- NUEVO: Estilos para el Modal de Pago --- */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-content {
-    background-color: #2a2a2a;
-    padding: 2rem;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 900px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    box-sizing: border-box;
-}
-
-.modal-content h2 {
-    margin-top: 0;
-}
-
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    background: none;
-    border: none;
-    font-size: 1.8rem;
-    cursor: pointer;
-}
-
-.payment-summary {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    border-bottom: 1px solid #444;
-    padding-bottom: 1rem;
-}
-.remaining-amount {
-    font-weight: bold;
-    color: #646cff;
-}
-
-.payment-form {
-    display: flex;
-    gap: 1rem;
-}
-.payment-form input, .payment-form select {
-    flex-grow: 1;
-    padding: 0.8rem;
-    border-radius: 4px;
-    border: 1px solid #555;
-    background-color: #333;
-    color: white;
-    font-size: 1rem;
-}
-
-.payment-list .payment-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem;
-    background-color: #333;
-    border-radius: 4px;
-    margin-bottom: 0.5rem;
-}
-
-.confirm-payment-button {
-    background-color: #28a745;
-    color: white;
-    padding: 1rem;
-    font-size: 1.2rem;
-    border: none;
-}
-.confirm-payment-button:hover:not(:disabled) {
-    background-color: #218838;
-}
-
-/* Utility: content should never overflow viewport */
-* { box-sizing: border-box; }
-
-/* Responsive rules */
-@media (max-width: 1024px){
-  .product-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
-}
-
-@media (max-width: 900px){
-  /* POS: apilar main y sidebar para pantallas pequeñas */
-  .pos-container { flex-direction: column; height: auto; }
-  .pos-main { order: 1; width: 100%; }
-  .order-sidebar { order: 2; width: 100%; min-width: 0; max-height: 40vh; overflow-y: auto; }
-
-  /* Product cards: ajustar tamaño de fuente y padding */
-  .product-card { padding: 0.75rem; }
-  .product-card h3 { font-size: 1rem; }
-  .product-card p { font-size: 1rem; }
-
-  /* Modal: usar layout column y que el aside quede debajo */
-  .modal-content { max-width: 98%; padding: 12px; }
-  .payment-aside { width: 100%; min-width: auto; }
-  .keypad-btn{ min-width: 54px; min-height: 54px; }
-}
-
-@media (max-width: 480px){
-  body{ font-size: 14px; }
-  .header { padding: 0 0.5rem; }
-  .main-content { padding: 0.75rem; }
-  .action-button { padding: 0.75rem 1rem; font-size: 1rem; }
-  .category-nav { gap: 0.4rem; }
-  .category-nav button { padding: 0.5rem 0.6rem; font-size: 0.95rem; }
-  .product-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 0.6rem; }
+/* --- Componentes UI Reutilizables --- */
+.card {
+    background-color: var(--white);
+    border: 1px solid #e0e7ff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
 }

@@ -1,3 +1,4 @@
+// Ruta: cucurucho-backend/src/tables/table.entity.ts
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Sale } from '../sales/sale.entity';
 
@@ -15,6 +16,10 @@ export class Table {
   @Column({ unique: true })
   name: string;
 
+  // --- CAMPO AÑADIDO ---
+  @Column({ type: 'int', default: 1 })
+  capacity: number;
+
   @Column({
     type: 'enum',
     enum: TableStatus,
@@ -25,4 +30,3 @@ export class Table {
   @OneToMany(() => Sale, (sale) => sale.table)
   sales: Sale[];
 }
-

@@ -1,0 +1,82 @@
+/* Ruta: cucurucho-frontend/src/pages/LoginPage.css */
+
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--navy-dark) 0%, var(--blue-dark) 100%);
+}
+
+.login-card {
+    background: rgba(26, 61, 99, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(74, 127, 167, 0.3);
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    color: var(--white-tint);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.login-logo {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 2.5rem; /* Espacio para el icono */
+    background: rgba(10, 25, 49, 0.5);
+    border: 1px solid var(--blue-medium);
+    border-radius: 0.5rem;
+    color: var(--white-tint);
+    font-size: 1rem;
+}
+
+.input-group input::placeholder {
+    color: var(--blue-light);
+}
+
+.input-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--blue-light);
+}
+
+.login-button {
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    background-color: var(--blue-medium);
+    border: none;
+    transition: transform 0.2s ease;
+}
+
+.login-button:hover {
+    transform: scale(1.02);
+}
+
+.login-error {
+    color: var(--error);
+    background-color: rgba(239, 68, 68, 0.1);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}

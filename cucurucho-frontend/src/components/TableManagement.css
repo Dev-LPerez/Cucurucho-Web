@@ -1,0 +1,113 @@
+/* Ruta: cucurucho-frontend/src/components/TableManagement.css */
+
+.table-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background-color: var(--white);
+    border: 1px solid #e0e7ff;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.stat-card .stat-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--blue-dark);
+    margin-bottom: 0.5rem;
+}
+
+.stat-card .stat-value {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--navy-dark);
+}
+
+.stat-card .stat-value.success {
+    color: var(--success);
+}
+
+.add-table-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 1rem;
+    align-items: flex-end;
+}
+
+.salon-tables-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.table-manage-card {
+    border: 1px solid #e0e7ff;
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: var(--white);
+}
+
+.table-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.table-card-header .table-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.table-card-header .table-icon {
+    width: 32px;
+    height: 32px;
+    background-color: #ecfdf5;
+    color: #059669;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.table-card-header .table-name {
+    font-weight: 600;
+    color: var(--navy-dark);
+}
+
+.table-card-header .table-capacity {
+    font-size: 14px;
+    color: var(--blue-dark);
+}
+
+.table-card-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.table-card-actions .btn-action {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    border: 1px solid var(--blue-light);
+    background-color: var(--white-tint);
+    color: var(--blue-dark);
+}
+
+.table-card-actions .btn-action:hover {
+    background-color: #eef2ff;
+}
+
+.table-card-actions .btn-icon {
+    padding: 0.5rem;
+    flex-shrink: 0;
+    width: 36px;
+}

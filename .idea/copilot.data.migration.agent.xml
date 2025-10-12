@@ -10,6 +10,7 @@
       <option value="6979ff3f-88ca-422e-8ba7-90f5e34e1950" />
       <option value="87f1834d-8890-4e9e-9bcf-673c4755f291" />
       <option value="8b6cfb2b-b6a5-4114-a3e9-2f173eda7068" />
+      <option value="9773a7c0-729f-4eef-8a21-8f24866106a1" />
       <option value="9925faf6-ae4e-4219-83e2-5f76e6d259ec" />
       <option value="9a423e4c-85ec-4b50-9ee5-89e1a6cb9080" />
       <option value="abdc0df5-0fc9-43cd-86e2-c00a0f3fc076" />
@@ -69,17 +70,17 @@
         <entry key="87f1834d-8890-4e9e-9bcf-673c4755f291">
           <value>
             <set>
-              <option value="c41e3855-7855-4a86-a7b8-0afd0af33705" />
-              <option value="4c32cce9-c5ea-45ab-9b71-6251caa19863" />
+              <option value="2414b64b-e1cc-4407-bf7b-9f24f71e001e" />
               <option value="297da659-cd16-4df3-8483-7d7e142dd31f" />
-              <option value="cf78784f-d5f6-4389-93a2-479ffe5499fa" />
               <option value="3eeaf9bc-5528-4cc6-83eb-7bda67772b6d" />
+              <option value="452e6e9f-451f-472f-b1f3-bcc2c31997e3" />
+              <option value="4c32cce9-c5ea-45ab-9b71-6251caa19863" />
+              <option value="73dabf7a-3fde-4ad4-a19f-42651c65d42b" />
+              <option value="c41e3855-7855-4a86-a7b8-0afd0af33705" />
+              <option value="cf78784f-d5f6-4389-93a2-479ffe5499fa" />
+              <option value="d9518668-e01a-48d7-b1b3-9152a9752fa9" />
               <option value="dad1dfcc-ebd4-4ddf-a454-95711842ab81" />
               <option value="e9ebf8bb-daad-4583-8772-0e2d0dda5ef1" />
-              <option value="452e6e9f-451f-472f-b1f3-bcc2c31997e3" />
-              <option value="2414b64b-e1cc-4407-bf7b-9f24f71e001e" />
-              <option value="73dabf7a-3fde-4ad4-a19f-42651c65d42b" />
-              <option value="d9518668-e01a-48d7-b1b3-9152a9752fa9" />
             </set>
           </value>
         </entry>
@@ -97,6 +98,21 @@
               <option value="e0422e59-5b4f-4748-bc20-475327b49c93" />
               <option value="e1f8b011-31b8-4dbf-89ba-dd3964f55324" />
               <option value="e4207d30-30e6-48f1-b213-e82344328561" />
+            </set>
+          </value>
+        </entry>
+        <entry key="9773a7c0-729f-4eef-8a21-8f24866106a1">
+          <value>
+            <set>
+              <option value="b8f36249-cc47-43d3-a4f4-2eab8349566f" />
+              <option value="5dc9edfe-b9b5-4a63-a458-16db249aef48" />
+              <option value="3c5c3390-ebe6-4037-8e1d-c34d58f2ec87" />
+              <option value="f8d598c5-bb35-45eb-a8a8-53faf5255c6a" />
+              <option value="7a989125-b6f9-41b7-803c-fb185be1cd55" />
+              <option value="73d99e3f-364b-4008-bd05-a5f06ab1af9a" />
+              <option value="71a6ffe5-7671-4e8d-b0d2-550d52f916ef" />
+              <option value="d720f45e-4068-4981-950d-fed05d8b910d" />
+              <option value="22d01a80-cd19-40a1-8f59-ca326536e758" />
             </set>
           </value>
         </entry>
@@ -181,40 +197,22 @@
     <pendingWorkingSetItems>
       <entry key="1216d1a2-228f-433f-8a4f-1782619f6177" />
       <entry key="1749ef61-c77f-4e01-ac65-ac05ae135233" />
-      <entry key="342ff7e4-bcbf-4940-a412-58013adb5c19">
-        <set>
-          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/services/api.js" />
-          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/services/authService.js" />
-          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/ProtectedRoute.jsx" />
-          <option value="file://$PROJECT_DIR$/SOLUCION_ERROR_401.md" />
-        </set>
-      </entry>
+      <entry key="342ff7e4-bcbf-4940-a412-58013adb5c19" />
       <entry key="62c7e2aa-e1bb-4c45-911f-439eb155ef51" />
       <entry key="6979ff3f-88ca-422e-8ba7-90f5e34e1950" />
-      <entry key="87f1834d-8890-4e9e-9bcf-673c4755f291">
+      <entry key="87f1834d-8890-4e9e-9bcf-673c4755f291" />
+      <entry key="8b6cfb2b-b6a5-4114-a3e9-2f173eda7068" />
+      <entry key="9773a7c0-729f-4eef-8a21-8f24866106a1">
         <set>
-          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/ProductEditModal.css" />
-          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/ProductEditModal.jsx" />
-          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/ProductManagement.jsx" />
-          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/layout.css" />
+          <option value="file://$PROJECT_DIR$/cucurucho-backend/src/app.module.ts" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/services/reportsService.js" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/pages/ReportsPage.jsx" />
+          <option value="file://$PROJECT_DIR$/cucurucho-backend/src/products/product.entity.ts" />
           <option value="file://$PROJECT_DIR$/cucurucho-backend/src/products/products.service.ts" />
-          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/CategoryEditModal.jsx" />
-          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/IngredientEditModal.jsx" />
-          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/TableEditModal.jsx" />
-          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/services/productService.js" />
-          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/services/inventoryService.js" />
-          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/services/tableService.js" />
-          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/CategoryManagement.jsx" />
-          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/IngredientManagement.jsx" />
-          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/TableManagement.jsx" />
-          <option value="file://$PROJECT_DIR$/cucurucho-backend/src/products/products.controller.ts" />
-          <option value="file://$PROJECT_DIR$/cucurucho-backend/src/inventory/inventory.controller.ts" />
-          <option value="file://$PROJECT_DIR$/cucurucho-backend/src/tables/tables.controller.ts" />
-          <option value="file://$PROJECT_DIR$/cucurucho-backend/src/inventory/inventory.service.ts" />
-          <option value="file://$PROJECT_DIR$/cucurucho-backend/src/tables/tables.service.ts" />
+          <option value="file://$PROJECT_DIR$/cucurucho-backend/src/products/products.module.ts" />
+          <option value="file://$PROJECT_DIR$/cucurucho-frontend/src/components/ProductManagement.jsx" />
         </set>
       </entry>
-      <entry key="8b6cfb2b-b6a5-4114-a3e9-2f173eda7068" />
       <entry key="9925faf6-ae4e-4219-83e2-5f76e6d259ec" />
       <entry key="9a423e4c-85ec-4b50-9ee5-89e1a6cb9080" />
       <entry key="abdc0df5-0fc9-43cd-86e2-c00a0f3fc076" />

@@ -23,6 +23,9 @@ export class Product {
   @Column('decimal', { precision: 10, scale: 2 })
   price: number;
 
+  @Column('decimal', { precision: 10, scale: 2, default: 0 })
+  cost: number; // Costo calculado a partir de la receta
+
   @ManyToOne(() => Category, (category) => category.products)
   category: Category;
 

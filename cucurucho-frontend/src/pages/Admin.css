@@ -1,0 +1,129 @@
+/* Ruta: cucurucho-frontend/src/pages/Admin.css */
+
+.admin-page-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.admin-page-header h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--navy-dark);
+}
+
+.admin-page-header p {
+    font-size: 16px;
+    color: var(--blue-dark);
+}
+
+.admin-card {
+    background-color: var(--white);
+    border: 1px solid #e0e7ff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px_6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+}
+
+.admin-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.admin-card-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--navy-dark);
+}
+
+.admin-form-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--blue-dark);
+}
+
+.form-group input,
+.form-group select {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--blue-light);
+    border-radius: 8px;
+    background-color: var(--white-tint);
+    font-size: 14px;
+}
+.form-group input:focus,
+.form-group select:focus {
+    outline: 2px solid var(--blue-medium);
+    border-color: transparent;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.admin-table th,
+.admin-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e0e7ff;
+    vertical-align: middle;
+}
+.admin-table th {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--blue-dark);
+    text-transform: uppercase;
+}
+.admin-table td {
+    font-size: 14px;
+    color: var(--navy-dark);
+}
+.admin-table tbody tr:hover {
+    background-color: var(--white-tint);
+}
+.admin-table .actions-cell {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+.admin-table .action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--blue-dark);
+}
+.admin-table .action-btn:hover {
+    color: var(--blue-medium);
+}
+.admin-table .action-btn.delete:hover {
+    color: var(--error);
+}
+
+.status-badge {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 99px;
+    display: inline-block;
+}
+.status-badge.positive {
+    background-color: #ecfdf5;
+    color: #059669;
+}
+.status-badge.negative {
+    background-color: #fef2f2;
+    color: var(--error);
+}

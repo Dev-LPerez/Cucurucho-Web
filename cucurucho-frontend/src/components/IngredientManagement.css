@@ -1,0 +1,34 @@
+/* Ruta: cucurucho-frontend/src/components/IngredientManagement.css */
+
+.alert-banner {
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.alert-banner.error {
+    background-color: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+}
+
+.add-ingredient-form {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto;
+    gap: 1rem;
+    align-items: flex-end;
+}
+
+.stock-bar-container {
+    width: 100%;
+    height: 8px;
+    background-color: #e0e7ff;
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.stock-bar-level {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 0.3s ease;
+}

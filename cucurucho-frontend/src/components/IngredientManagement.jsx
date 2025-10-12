@@ -1,152 +1,194 @@
+// Ruta: cucurucho-frontend/src/components/IngredientManagement.jsx
+
 import React, { useState, useEffect } from 'react';
 import { inventoryService } from '../services/inventoryService';
-import IngredientEditModal from './IngredientEditModal';
+import '../pages/Admin.css'; // Estilos comunes
+import './IngredientManagement.css'; // Estilos específicos
+
+const StockLevelBar = ({ actual, min }) => {
+    if (min === 0 || actual === 0) { // Evita división por cero y muestra barra vacía si no hay stock
+        return (
+            <div className="stock-bar-container">
+                <div className="stock-bar-level" style={{ width: '0%', backgroundColor: 'var(--error)' }}></div>
+            </div>
+        );
+    }
+    const percentage = Math.min((actual / min) * 100, 100);
+    let barColor = 'var(--success)';
+    if (percentage < 50) barColor = 'var(--warning)';
+    if (percentage < 25) barColor = 'var(--error)';
+
+    return (
+        <div className="stock-bar-container">
+            <div className="stock-bar-level" style={{ width: `${percentage}%`, backgroundColor: barColor }}></div>
+        </div>
+    );
+};
 
 function IngredientManagement() {
+    // --- ESTADOS PARA DATOS REALES ---
     const [ingredients, setIngredients] = useState([]);
-    const [newIngredientName, setNewIngredientName] = useState('');
-    const [newIngredientStock, setNewIngredientStock] = useState('');
-    const [newIngredientUnit, setNewIngredientUnit] = useState('g');
-    const [newIngredientCost, setNewIngredientCost] = useState('');
-    const [editingIngredient, setEditingIngredient] = useState(null);
-    const [showEditModal, setShowEditModal] = useState(false);
 
-    const fetchIngredients = () => {
-        inventoryService.getIngredients()
-            .then(setIngredients)
-            .catch(err => console.error("Error cargando ingredientes", err));
+    // --- ESTADOS PARA EL FORMULARIO ---
+    const [newName, setNewName] = useState('');
+    const [newStock, setNewStock] = useState('');
+    const [newMinStock, setNewMinStock] = useState('');
+    const [newUnit, setNewUnit] = useState('g');
+    const [newCost, setNewCost] = useState('');
+
+    // --- FUNCIÓN PARA CARGAR DATOS ---
+    const loadIngredients = async () => {
+        try {
+            const data = await inventoryService.getIngredients();
+            setIngredients(data);
+        } catch (error) {
+            console.error("Error al cargar ingredientes:", error);
+            alert('No se pudieron cargar los ingredientes desde el servidor.');
+        }
     };
 
+    // --- Carga inicial de datos ---
     useEffect(() => {
-        fetchIngredients();
+        loadIngredients();
     }, []);
 
+    // --- MANEJO DEL FORMULARIO ---
     const handleSubmit = async (event) => {
         event.preventDefault();
         const ingredientData = {
-            name: newIngredientName,
-            stock: parseFloat(newIngredientStock),
-            unit: newIngredientUnit,
-            cost: parseFloat(newIngredientCost),
+            name: newName,
+            stock: parseFloat(newStock),
+            stockMinimo: parseFloat(newMinStock), // Asegúrate que tu backend maneje este campo
+            unit: newUnit,
+            cost: parseFloat(newCost),
         };
+
         try {
             await inventoryService.createIngredient(ingredientData);
-            fetchIngredients();
-            setNewIngredientName('');
-            setNewIngredientStock('');
-            setNewIngredientCost('');
+            alert('Ingrediente creado exitosamente!');
+            // Limpiar formulario y recargar lista
+            setNewName('');
+            setNewStock('');
+            setNewMinStock('');
+            setNewCost('');
+            loadIngredients();
         } catch (error) {
-            console.error("Error al crear ingrediente", error);
+            console.error("Error al crear ingrediente:", error);
+            alert(`Error: ${error.response?.data?.message || error.message}`);
         }
     };
 
-    const handleStockAdjustment = async (ingredient, adjustmentType) => {
-        const amountStr = prompt(`¿Qué cantidad de "${ingredient.name}" deseas ${adjustmentType === 'add' ? 'añadir' : 'quitar'}?`);
-        if (amountStr === null) return;
-
-        const amount = parseFloat(amountStr);
-        if (isNaN(amount) || amount <= 0) {
-            alert('Por favor, introduce un número positivo válido.');
-            return;
-        }
-
-        const change = adjustmentType === 'add' ? amount : -amount;
-
-        try {
-            await inventoryService.updateStock(ingredient.id, change);
-            fetchIngredients();
-        } catch (error) {
-            alert(`Error al ajustar el stock: ${error.response?.data?.message || error.message}`);
-        }
-    };
-
-    const handleEdit = (ingredient) => {
-        setEditingIngredient(ingredient);
-        setShowEditModal(true);
-    };
-
-    const handleSave = async (id, ingredientData) => {
-        try {
-            await inventoryService.updateIngredient(id, ingredientData);
-            fetchIngredients();
-        } catch (error) {
-            console.error('Error al actualizar el ingrediente:', error);
-            throw error;
-        }
-    };
-
-    const handleDelete = async (ingredient) => {
-        if (window.confirm(`¿Estás seguro de que deseas eliminar "${ingredient.name}"? Esta acción no se puede deshacer.`)) {
+    // --- MANEJO DE ELIMINACIÓN ---
+    const handleDelete = async (ingredientId, ingredientName) => {
+        if (window.confirm(`¿Estás seguro de que deseas eliminar "${ingredientName}"?`)) {
             try {
-                await inventoryService.deleteIngredient(ingredient.id);
-                fetchIngredients();
+                await inventoryService.deleteIngredient(ingredientId);
+                alert('Ingrediente eliminado.');
+                loadIngredients();
             } catch (error) {
-                alert(`Error al eliminar el ingrediente: ${error.response?.data?.message || error.message}`);
+                console.error(`Error al eliminar el ingrediente ${ingredientId}:`, error);
+                alert(`Error al eliminar: ${error.response?.data?.message || error.message}`);
             }
         }
     };
 
-    const handleCloseModal = () => {
-        setShowEditModal(false);
-        setEditingIngredient(null);
-    };
+    const lowStockIngredients = ingredients.filter(ing => ing.stock < (ing.stockMinimo || 0));
 
     return (
-        <div>
-            <h2>Gestión de Ingredientes</h2>
+        <div className="admin-page-container">
+            <div className="admin-page-header">
+                <h2>Gestión de Ingredientes</h2>
+                <p>Controla tu inventario y stock mínimo</p>
+            </div>
 
-            <form onSubmit={handleSubmit} className="admin-form">
-                <h3>Agregar Nuevo Ingrediente</h3>
-                <input type="text" placeholder="Nombre del ingrediente" value={newIngredientName} onChange={e => setNewIngredientName(e.target.value)} required />
-                <input type="number" placeholder="Stock Inicial" value={newIngredientStock} onChange={e => setNewIngredientStock(e.target.value)} required step="0.01" min="0" />
-                <input type="number" placeholder="Costo por unidad" value={newIngredientCost} onChange={e => setNewIngredientCost(e.target.value)} required step="0.01" min="0" />
-                <select value={newIngredientUnit} onChange={e => setNewIngredientUnit(e.target.value)} required>
-                    <option value="g">Gramos (g)</option>
-                    <option value="kg">Kilogramos (kg)</option>
-                    <option value="ml">Mililitros (ml)</option>
-                    <option value="l">Litros (l)</option>
-                    <option value="units">Unidades</option>
-                </select>
-                <button type="submit">Crear Ingrediente</button>
-            </form>
-
-            <h3>Inventario Actual</h3>
-            <ul className="admin-list">
-                {ingredients.map(ing => (
-                    <li key={ing.id} className="product-item">
-                        <div className="product-info">
-                            <span className="product-name">{ing.name}</span>
-                            <span className="product-price">{ing.stock} {ing.unit}</span>
-                            <span className="product-category">${ing.cost} / {ing.unit}</span>
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                            <button onClick={() => handleStockAdjustment(ing, 'add')} style={{ padding: '8px 16px', fontSize: '1.2rem', background: '#4ade80', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer' }}>+</button>
-                            <button onClick={() => handleStockAdjustment(ing, 'remove')} style={{ padding: '8px 16px', fontSize: '1.2rem', background: '#f59e0b', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer' }}>-</button>
-                            <button
-                                className="btn-edit-product"
-                                onClick={() => handleEdit(ing)}
-                            >
-                                ✏️ Editar
-                            </button>
-                            <button
-                                className="btn-edit-product"
-                                style={{ background: 'linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%)' }}
-                                onClick={() => handleDelete(ing)}
-                            >
-                                🗑️ Eliminar
-                            </button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
-
-            {showEditModal && editingIngredient && (
-                <IngredientEditModal
-                    ingredient={editingIngredient}
-                    onClose={handleCloseModal}
-                    onSave={handleSave}
-                />
+            {lowStockIngredients.length > 0 && (
+                <div className="alert-banner error">
+                    <p>
+                        <strong>
+                            ⚠️ {lowStockIngredients.length} ingrediente(s) con stock bajo.
+                        </strong>
+                        Revisa la lista y realiza pedidos para mantener el inventario.
+                    </p>
+                </div>
             )}
+
+            <div className="admin-card">
+                <div className="admin-card-header">
+                    <h3>Agregar Nuevo Ingrediente</h3>
+                </div>
+                <form className="add-ingredient-form" onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label htmlFor="name">Nombre</label>
+                        <input type="text" id="name" placeholder="Ej: Azúcar" value={newName} onChange={e => setNewName(e.target.value)} required />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="stockActual">Stock Actual</label>
+                        <input type="number" id="stockActual" placeholder="0" value={newStock} onChange={e => setNewStock(e.target.value)} required />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="stockMinimo">Stock Mínimo</label>
+                        <input type="number" id="stockMinimo" placeholder="0" value={newMinStock} onChange={e => setNewMinStock(e.target.value)} required />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="unidad">Unidad</label>
+                        <select id="unidad" value={newUnit} onChange={e => setNewUnit(e.target.value)}>
+                            <option value="g">g</option>
+                            <option value="kg">kg</option>
+                            <option value="ml">ml</option>
+                            <option value="l">l</option>
+                            <option value="units">unidades</option>
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="costo">Costo/Unidad ($)</label>
+                        <input type="number" id="costo" placeholder="0.00" step="0.01" value={newCost} onChange={e => setNewCost(e.target.value)} required />
+                    </div>
+                    <button type="submit" style={{ alignSelf: 'end', height: '44px' }}>
+                        + Agregar Ingrediente
+                    </button>
+                </form>
+            </div>
+
+            <div className="admin-card">
+                <div className="admin-card-header">
+                    <h3>Inventario de Ingredientes</h3>
+                </div>
+                <table className="admin-table">
+                    <thead>
+                    <tr>
+                        <th>Ingrediente</th>
+                        <th>Stock Actual</th>
+                        <th>Stock Mínimo</th>
+                        <th>Estado</th>
+                        <th>Nivel de Stock</th>
+                        <th>Costo/Unidad</th>
+                        <th>Valor Total</th>
+                        <th style={{textAlign: 'right'}}>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {ingredients.map(ing => (
+                        <tr key={ing.id}>
+                            <td>{ing.name}</td>
+                            <td>{ing.stock} {ing.unit}</td>
+                            <td>{ing.stockMinimo || 0} {ing.unit}</td>
+                            <td>
+                                    <span className={`status-badge ${ing.stock >= (ing.stockMinimo || 0) ? 'positive' : 'negative'}`}>
+                                        {ing.stock >= (ing.stockMinimo || 0) ? 'Bien' : 'Bajo'}
+                                    </span>
+                            </td>
+                            <td><StockLevelBar actual={ing.stock} min={ing.stockMinimo || 0} /></td>
+                            <td>${parseFloat(ing.cost).toFixed(2)}</td>
+                            <td>${(ing.stock * ing.cost).toFixed(2)}</td>
+                            <td className="actions-cell">
+                                <button className="action-btn">✏️</button>
+                                <button className="action-btn delete" onClick={() => handleDelete(ing.id, ing.name)}>🗑️</button>
+                            </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }

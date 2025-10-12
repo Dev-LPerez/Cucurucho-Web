@@ -11,6 +11,7 @@ import { InventoryModule } from './inventory/inventory.module';
 import { SalesModule } from './sales/sales.module';
 import { TablesModule } from './tables/tables.module';
 import { QueueModule } from './queue/queue.module';
+import { ReportsModule } from './reports/reports.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { QueueModule } from './queue/queue.module';
     SalesModule,
     TablesModule,
     QueueModule,
+    ReportsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

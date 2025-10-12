@@ -1,0 +1,229 @@
+/* Ruta: cucurucho-frontend/src/pages/PosPage.css */
+
+.pos-page {
+    display: flex;
+    height: calc(100vh - 64px); /* Altura total menos el header */
+    width: 100%;
+    background-color: var(--navy-dark);
+    color: var(--white-tint);
+}
+
+/* --- Columna Principal (Izquierda) --- */
+.pos-main-view {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+.pos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.pos-header h2 {
+    color: var(--white-tint);
+}
+
+.pos-view-toggle {
+    display: flex;
+    background-color: var(--navy-dark);
+    border: 1px solid var(--blue-dark);
+    border-radius: 99px;
+    padding: 4px;
+}
+
+.pos-view-toggle button {
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 99px;
+    font-weight: 500;
+    color: var(--blue-light);
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.pos-view-toggle button.active {
+    background-color: var(--blue-medium);
+    color: var(--white);
+}
+
+/* Estilos Mostrador */
+.category-filters {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--blue-dark);
+}
+
+.category-filters button {
+    background-color: var(--blue-dark);
+    color: var(--blue-light);
+    border: 1px solid var(--blue-dark);
+}
+
+.category-filters button.active {
+    background-color: var(--white-tint);
+    color: var(--blue-dark);
+    border-color: var(--white-tint);
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+}
+
+.product-card {
+    background-color: var(--white-tint);
+    color: var(--navy-dark);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+}
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.product-card h3 {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.product-card p {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--blue-dark);
+}
+
+.product-card .add-icon {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--blue-medium);
+}
+
+
+/* Estilos Mapa de Mesas */
+.table-map-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 1.5rem;
+}
+
+.table-card {
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 2px solid transparent;
+}
+.table-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.table-card .table-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+.table-card .table-status-badge {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 99px;
+    display: inline-block;
+}
+
+.table-card.status-free { background-color: var(--success); color: var(--white); }
+.table-card.status-occupied { background-color: var(--error); color: var(--white); }
+.table-card.status-paying { background-color: var(--warning); color: var(--navy-dark); }
+
+
+/* --- Sidebar de Orden (Derecha) --- */
+.pos-order-sidebar {
+    width: 350px;
+    flex-shrink: 0;
+    background-color: var(--white-tint);
+    color: var(--navy-dark);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid #e0e7ff;
+}
+
+.order-empty {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #9aa0a6;
+}
+
+.order-empty-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.order-items-list {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin: 1rem 0;
+}
+
+.order-summary {
+    border-top: 1px solid var(--blue-light);
+    padding-top: 1rem;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 16px;
+}
+
+.summary-row.total {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy-dark);
+}
+
+.order-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.order-actions .btn {
+    flex: 1;
+    padding: 0.75rem;
+    font-weight: 600;
+}
+.order-actions .btn-clear {
+    background-color: #fee2e2;
+    color: var(--error);
+    border: 1px solid var(--error);
+}
+.order-actions .btn-pay {
+    background-color: var(--success);
+    color: var(--white);
+    padding: 1rem;
+    font-size: 1.2rem;
+}

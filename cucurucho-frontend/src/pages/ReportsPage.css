@@ -1,0 +1,47 @@
+/* Ruta: cucurucho-frontend/src/pages/ReportsPage.css */
+
+.report-config-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr auto;
+    gap: 1.5rem;
+    align-items: flex-end;
+}
+
+.report-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.report-stat-card {
+    background-color: var(--white-tint);
+    border: 1px solid #e0e7ff;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.report-stat-card .stat-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--blue-dark);
+    margin-bottom: 0.5rem;
+}
+
+.report-stat-card .stat-value {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--navy-dark);
+}
+
+.report-stat-card .stat-value.positive { color: var(--success); }
+.report-stat-card .stat-value.negative { color: var(--error); }
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+    .report-config-grid {
+        grid-template-columns: 1fr;
+    }
+    .report-metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

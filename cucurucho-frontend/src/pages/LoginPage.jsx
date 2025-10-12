@@ -1,58 +1,61 @@
+// Ruta: cucurucho-frontend/src/pages/LoginPage.jsx
+
 import React, { useState } from 'react';
 import { authService } from '../services/authService';
-
-// Importamos useNavigate para poder redirigir al usuario
 import { useNavigate } from 'react-router-dom';
+import './LoginPage.css';
 
 function LoginPage() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setError(''); // Limpiamos errores previos
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setError('');
 
-    try {
-      await authService.login(username, password);
-      // Si el login es exitoso, redirigimos al dashboard
-      navigate('/dashboard'); 
-    } catch (err) {
-      setError('Usuario o contraseña incorrectos.');
-    }
-  };
+        try {
+            await authService.login(username, password);
+            // --- CORRECCIÓN AQUÍ ---
+            // Redirigimos a "/pos" que es la nueva página principal para usuarios autenticados.
+            navigate('/pos');
+        } catch (err) {
+            setError('Usuario o contraseña incorrectos.');
+        }
+    };
 
-  return (
-    <div>
-      <h2>Iniciar Sesión</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Usuario:</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
+    return (
+        <div className="login-page">
+            <div className="login-card">
+                <h1 className="login-logo">🍦 Cucurucho Digital</h1>
+                <form onSubmit={handleSubmit} className="login-form">
+                    <div className="input-group">
+                        <input
+                            type="text"
+                            id="username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            placeholder="Usuario o Email"
+                            required
+                        />
+                    </div>
+                    <div className="input-group">
+                        <input
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Contraseña"
+                            required
+                        />
+                    </div>
+                    <button type="submit" className="login-button">Iniciar Sesión</button>
+                    {error && <p className="login-error">{error}</p>}
+                </form>
+            </div>
         </div>
-        <div>
-          <label htmlFor="password">Contraseña:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        {/* Mostramos un mensaje de error si existe */}
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">Entrar</button>
-      </form>
-    </div>
-  );
+    );
 }
 
 export default LoginPage;
